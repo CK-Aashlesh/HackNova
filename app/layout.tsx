@@ -14,9 +14,9 @@ import {
 import { SITE, absoluteUrl } from '@/lib/site';
 import './globals.css';
 
-const TITLE = `${SITE.brand} | National AI Hackathon · 24 Hours · IIT Tirupati`;
+const TITLE = `${SITE.brand} | AI Hackathon · 24 Hours · IIT Tirupati`;
 const DESCRIPTION =
-    'HackNova 2026 is a free 24-hour national level AI hackathon by Sphere Hive at IIT Tirupati (Aug 8 — 9, 2026). Compete on a data-centric AI challenge with 3LC.ai. ₹35,000 prize pool plus sponsored prizes.';
+    'HackNova 2026 is a free 24-hour AI hackathon by Sphere Hive at IIT Tirupati (August 22 - 23, 2026), exclusive for IIT Tirupati, IISER Tirupati, and neighbouring institutes. Compete on a data-centric AI challenge with 3LC.ai. ₹50,000 prize pool plus sponsored prizes.';
 
 export const viewport: Viewport = {
     themeColor: SITE.themeColor,
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
         'HackNova 2026',
         'AI hackathon',
         'AI hackathon India',
-        'national hackathon 2026',
-        'national level hackathon Andhra Pradesh',
+        'IISER Tirupati hackathon',
+        'IIT Tirupati tech fest',
         'IIT Tirupati hackathon',
         'data centric AI hackathon',
         '3LC.ai hackathon',
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
                 url: absoluteUrl('/api/og'),
                 width: 1200,
                 height: 630,
-                alt: 'HackNova 2026 — National AI Hackathon',
+                alt: 'HackNova 2026 - National AI Hackathon',
             },
         ],
         locale: 'en_IN',
@@ -162,10 +162,10 @@ export default function RootLayout({
                 <ScrollProgress />
 
                 {/* Side rails */}
-                <div className="fixed bottom-10 left-10 [writing-mode:vertical-rl] rotate-180 text-[10px] font-mono tracking-[0.4em] uppercase text-white/25 z-40 pointer-events-none hidden lg:block">
-                    Coded · in · the · cosmos
+                <div className="fixed bottom-20 left-10 [writing-mode:vertical-rl] rotate-180 text-[10px] font-mono tracking-[0.4em] uppercase text-white/25 z-40 pointer-events-none hidden lg:block">
+                    Three · lines · of · code
                 </div>
-                <div className="fixed bottom-10 right-10 [writing-mode:vertical-rl] text-[10px] font-mono tracking-[0.4em] uppercase text-white/25 z-40 pointer-events-none hidden lg:block">
+                <div className="fixed bottom-20 right-10 [writing-mode:vertical-rl] text-[10px] font-mono tracking-[0.4em] uppercase text-white/25 z-40 pointer-events-none hidden lg:block">
                     Navigate · the · stars
                 </div>
 

@@ -141,7 +141,7 @@ export default function ManifestoPage() {
               Bring your A-team.
             </div>
             <p className="text-sm text-white/55 mt-1">
-              Aug 08 - 09, 2026 · IIT Tirupati
+              August 22 - 23, 2026 · IIT Tirupati
             </p>
           </div>
           <a

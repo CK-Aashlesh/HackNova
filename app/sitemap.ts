@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             lastModified: now,
             changeFrequency: 'weekly',
             priority: 1,
-            // Multilingual + image hints — supported by Google's sitemap spec
+            // Multilingual + image hints - supported by Google's sitemap spec
             alternates: { languages: { 'en-IN': SITE.url } },
             images: [absoluteUrl('/api/og'), absoluteUrl('/logo.png')],
         },

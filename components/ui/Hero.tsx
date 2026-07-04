@@ -1,188 +1,292 @@
 "use client";
 
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
-import { ChevronRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { ArrowUpRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-/**
- * Cinematic hero - the astronaut footage is the centerpiece.
- * Composition is intentionally quiet: tiny brand line up top,
- * a single bold title block in the lower third (film-poster style),
- * one tagline, one info row, two buttons. Nothing else competes.
- */
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
+
 export default function Hero() {
-  const ref = useRef<HTMLElement | null>(null);
-  const reduce = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const taglineRef = useRef<HTMLParagraphElement | null>(null);
+  const infoRef = useRef<HTMLDivElement | null>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
+  // 1. GSAP Scroll-Driven, Entrance, and Ambient Particle Animations
+  useGSAP(
+    () => {
+      // Entrance Timeline
+      const tl = gsap.timeline();
+      
+      tl.from(
+        ".hero-subtitle-line",
+        {
+          y: "105%",
+          duration: 1.2,
+          ease: "power4.out",
+        }
+      )
+        .from(
+          ".hero-title-line",
+          {
+            y: "105%",
+            duration: 1.4,
+            ease: "power4.out",
+            stagger: 0.15,
+          },
+          "-=0.9"
+        )
+        .from(
+          taglineRef.current,
+          {
+            opacity: 0,
+            y: 15,
+            duration: 1.2,
+            ease: "power3.out",
+          },
+          "-=1.0"
+        )
+        .from(
+          infoRef.current,
+          {
+            opacity: 0,
+            y: 10,
+            duration: 1.0,
+            ease: "power2.out",
+          },
+          "-=0.9"
+        )
+        .from(
+          ".hero-cta-btn",
+          {
+            opacity: 0,
+            y: 15,
+            duration: 0.9,
+            ease: "power3.out",
+            stagger: 0.1,
+          },
+          "-=0.9"
+        )
+        .from(
+          ".scroll-cue-el",
+          {
+            opacity: 0,
+            y: 10,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.5"
+        );
 
-  // Gentle, long parallax - matches the floating motion of the footage.
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const fadeOut = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const videoY = useTransform(scrollYProgress, [0, 1], [0, 60]);
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.06]);
+      // Scroll-Driven Parallax on Background Video/Image Container
+      gsap.to(".hero-bg-scroll", {
+        y: 120,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // Scroll-Driven Fade-out on Text Content
+      gsap.to(contentRef.current, {
+        opacity: 0,
+        y: -100,
+        ease: "power1.inOut",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom 30%",
+          scrub: true,
+        },
+      });
+
+      // Ambient Floating Particles Setup (Set random coordinates & animate client-side only)
+      gsap.set(".cosmic-dust-particle", {
+        x: () => gsap.utils.random(-80, 80),
+        y: () => gsap.utils.random(-80, 80),
+        scale: () => gsap.utils.random(0.6, 2.0),
+        opacity: () => gsap.utils.random(0.1, 0.5),
+      });
+
+      gsap.to(".cosmic-dust-particle", {
+        x: "+=random(-60, 60)",
+        y: "+=random(-90, 90)",
+        opacity: "random(0.15, 0.75)",
+        duration: "random(8, 15)",
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: {
+          amount: 2.5,
+          from: "random",
+        },
+      });
+    },
+    { scope: containerRef }
+  );
+
+  // 2. Interactive Mouse Parallax (Dynamic Depth Shift)
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const xVal = (e.clientX - width / 2) / (width / 2); // -1 to 1
+      const yVal = (e.clientY - height / 2) / (height / 2); // -1 to 1
+
+      // Move the video backdrop and particles slightly in opposite directions for dynamic depth
+      gsap.to(".hero-bg-media", {
+        x: xVal * -30,
+        y: yVal * -30,
+        duration: 1.5,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+
+      gsap.to(".cosmic-dust-particle", {
+        x: (i) => (i % 2 === 0 ? xVal * 25 : xVal * -25),
+        y: (i) => (i % 2 === 0 ? yVal * 25 : yVal * -25),
+        duration: 1.8,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   return (
     <section
-      ref={ref}
+      ref={containerRef}
       id="home"
-      className="relative min-h-screen w-full overflow-hidden"
+      className="relative min-h-screen w-full overflow-hidden bg-black"
     >
-      {/* ============== VIDEO LAYER ============== */}
-      <motion.div
-        style={reduce ? undefined : { y: videoY, scale: videoScale }}
-        className="absolute inset-0 z-0 bg-space-black"
-      >
-        {/*
-          Full-bleed at every viewport. The clip is 16:9 so on a tall phone
-          something must crop — we anchor to top-center on small screens so
-          the astronaut sits in the upper half (above the title block) and
-          shift the focal point lower as the viewport widens.
-        */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-[center_top] sm:object-[center_25%] md:object-[center_30%] opacity-75 mix-blend-screen pointer-events-none"
-        >
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
-
-        {/* Heavy darken - protects text legibility, fades into the section */}
-        <div className="absolute inset-0 bg-gradient-to-b from-space-black/85 via-space-black/35 to-space-black" />
-      </motion.div>
-
-      {/* ============== CONTENT ============== */}
-      <motion.div
-        style={reduce ? undefined : { opacity: fadeOut, y: contentY }}
-        className="relative z-10 min-h-screen flex flex-col"
-      >
-        {/* Top wordmark - tiny, restrained */}
-        <motion.div
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="pt-32 sm:pt-36 flex justify-center"
-        >
-          <span className="font-mono text-[10px] tracking-[0.5em] uppercase text-white/45">
-            Sphere Hive · Presents
-          </span>
-        </motion.div>
-
-        {/* Spacer that lets the astronaut breathe */}
-        <div className="flex-grow" />
-
-        {/* Title block, lower-third - film poster cadence */}
-        <div className="px-6 pb-24 sm:pb-28 md:pb-32 flex flex-col items-center text-center">
-          {/* Screen-reader-only descriptive heading. The visible wordmark
-              below is decorative; this is the keyword-rich semantic H1. */}
-          <h1 className="sr-only">
-            HackNova 2026 - National AI Hackathon at IIT Tirupati · 24 hours · Aug 8 - 9, 2026
-          </h1>
-          <motion.div
-            aria-hidden="true"
-            initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0)" }}
-            transition={{ duration: 1.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display font-black text-white tracking-[-0.04em] leading-[0.9] text-[64px] sm:text-[92px] md:text-[124px] lg:text-[148px]"
-            style={{
-              textShadow:
-                "0 2px 30px rgba(0,0,0,0.55), 0 0 60px rgba(0,0,0,0.35)",
-            }}
-          >
-            HACKNOVA
-          </motion.div>
-
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 1.6, delay: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 mb-5 h-px w-32 sm:w-40 origin-center bg-gradient-to-r from-transparent via-white/40 to-transparent"
+      {/* ===== BACKGROUND VIDEO & IMAGE FIT ON THE RIGHT SIDE ===== */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
+        <div className="hero-bg-scroll absolute right-0 top-0 h-[115%] w-full md:w-[70%] lg:w-[58%] pointer-events-none">
+          {/* Using hero-bg.mp4 video backdrop with hero-bg.png as fallback poster */}
+          <video
+            src="/hero-bg.mp4"
+            poster="/hero-bg.png"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="hero-bg-media h-full w-full object-cover object-right scale-110"
           />
+        </div>
+        
+        {/* Ambient Cosmic Shade layers to protect text readability and blend image edges */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/95 to-transparent w-full md:w-[75%] pointer-events-none z-10" />
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-space-black to-transparent h-[45%] pointer-events-none z-10" />
+      </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-sm sm:text-base md:text-[17px] tracking-[0.32em] uppercase text-white/70 max-w-2xl"
+      {/* ===== AMBIENT FLOATING SPACE PARTICLES OVERLAY ===== */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
+        {Array.from({ length: 16 }).map((_, i) => (
+          <div
+            key={i}
+            className="cosmic-dust-particle absolute rounded-full bg-gradient-to-br from-[#D4AF37] to-[#F1D08A]/40"
+            style={{
+              width: `${(i % 3) * 1.5 + 2}px`,
+              height: `${(i % 3) * 1.5 + 2}px`,
+              // Spread initially on the right side over the cosmic background
+              top: `${(i * 5.5) + 10}%`,
+              left: `${(i % 4) * 12 + 40}%`,
+              filter: "blur(0.5px)",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* ===== CONTENT ===== */}
+      <div
+        ref={contentRef}
+        className="relative z-10 min-h-screen flex flex-col justify-end"
+      >
+        <div className="px-6 md:px-12 lg:px-20 pb-20 sm:pb-24 md:pb-28 max-w-3xl">
+          {/* Accessible heading */}
+          <h1 className="sr-only">
+            HackNova 2026 - AI Hackathon at IIT Tirupati · 24 hours · August 22 - 23, 2026
+          </h1>
+
+          {/* Small subtitle above title */}
+          <div className="overflow-hidden mb-3.5">
+            <span className="hero-subtitle-line block font-mono text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-[#D4AF37]/80">
+              KVGCE SPHERE HIVE X DGITALWIZARDS IIT TIRUPATI
+            </span>
+          </div>
+
+          {/* Title */}
+          <div
+            aria-hidden="true"
+            className="font-display font-black tracking-[-0.03em] leading-[0.92] uppercase mb-5 text-[36px] sm:text-[48px] md:text-[64px] lg:text-[76px]"
           >
-            A National AI Hackathon
-          </motion.p>
+            <div className="overflow-hidden">
+              <span className="hero-title-line block text-white">
+                HACK <span className="text-gradient-gold">Nova.</span>
+              </span>
+            </div>
+          </div>
 
-          {/* Info row - single line of facts, no chips, no badges */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 1.3 }}
-            className="mt-7 flex items-center gap-3 sm:gap-5 font-mono text-[10px] sm:text-[11px] tracking-[0.3em] uppercase text-white/55"
+          {/* Tagline */}
+          <p
+            ref={taglineRef}
+            className="text-[14px] sm:text-[15px] text-white/55 leading-[1.7] max-w-md mb-6 font-light"
+          >
+            An AI hackathon for IIT Tirupati, IISER Tirupati, and neighbouring institutes uniting innovators, creators, and problem solvers to build limitless solutions for tomorrow.
+          </p>
+
+          {/* Info pills */}
+          <div
+            ref={infoRef}
+            className="flex items-center gap-3 font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 mb-8"
           >
             <span>24 Hours</span>
-            <span className="w-1 h-1 rounded-full bg-white/30" />
-            <span>Aug 08–09 · 2026</span>
-            <span className="w-1 h-1 rounded-full bg-white/30" />
+            <span className="w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
+            <span>Aug 22–23 · 2026</span>
+            <span className="w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
             <span>IIT Tirupati</span>
-          </motion.div>
+          </div>
 
           {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, delay: 1.45, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-10 flex flex-col sm:flex-row items-center gap-3"
-          >
+          <div className="flex items-center gap-3">
             <a
               href="https://unstop.com/p/hacknova-sphere-hive-kvg-college-of-engineering-sullia-1693176"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary group h-12 px-7 min-w-[180px] text-[12px] font-bold uppercase tracking-[0.18em]"
+              className="hero-cta-btn btn-primary group h-11 px-6 text-[11px] font-bold uppercase tracking-[0.15em]"
             >
-              <span>Register Now</span>
-              <ChevronRight className="w-4 h-4 -mr-1 transition-transform duration-300 group-hover:translate-x-0.5" />
+              Register Now
+              <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
 
             <button
               onClick={() =>
-                document
-                  .getElementById("about")
-                  ?.scrollIntoView({ behavior: "smooth" })
+                document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
               }
-              className="btn-secondary h-12 px-7 min-w-[180px] text-[12px] font-bold uppercase tracking-[0.18em]"
+              className="hero-cta-btn btn-secondary h-11 px-6 text-[11px] font-bold uppercase tracking-[0.15em]"
             >
-              Learn More
+              Explore Tracks
             </button>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Minimal scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2, delay: 1.8 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/35"
-        aria-hidden
-      >
-        <span className="font-mono text-[9px] tracking-[0.45em] uppercase">
-          Scroll
+      {/* Scroll cue */}
+      <div className="scroll-cue-el absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 text-white/25">
+        <span className="font-mono text-[9px] tracking-[0.4em] uppercase">Scroll</span>
+        <span className="relative w-px h-8 overflow-hidden bg-white/10">
+          <span className="absolute inset-x-0 top-0 h-2.5 bg-[#D4AF37]/60 animate-scroll-dot" />
         </span>
-        <span className="relative w-px h-10 overflow-hidden bg-white/10">
-          <motion.span
-            className="absolute inset-x-0 top-0 h-3 bg-white/70"
-            animate={{ y: [-12, 40] }}
-            transition={{
-              duration: 2.4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        </span>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -31,7 +31,7 @@ export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <footer className="relative pt-20 pb-10 bg-space-black border-t border-white/5 overflow-hidden">
+    <footer className="relative pt-20 pb-10 bg-space-black border-t border-space-violet/25 overflow-hidden">
       {/* Top edge gradient */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-space-purple/60 to-transparent" />
 
@@ -40,7 +40,7 @@ export default function Footer() {
         className="absolute top-[-30%] left-1/2 -translate-x-1/2 w-[80%] h-[400px] blur-[120px] opacity-30 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse, rgba(139,92,246,0.25) 0%, transparent 60%)",
+            "radial-gradient(ellipse, rgba(212,175,55,0.25) 0%, transparent 60%)",
         }}
       />
 
@@ -65,8 +65,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-sm text-ink-dim font-light leading-relaxed max-w-md mb-6">
-              A national-level 24-hour AI hackathon presented by Sphere Hive at
-              IIT Tirupati. Build the future with the best minds in the country.
+              A 24-hour AI hackathon presented by Sphere Hive at IIT Tirupati, exclusive for IIT Tirupati, IISER Tirupati, and neighbouring institutes.
             </p>
 
             {/* Socials */}
@@ -145,9 +144,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-6 border-t border-space-violet/25 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="font-mono text-[11px] tracking-[0.2em] text-ink-dim uppercase">
-            © {new Date().getFullYear()} HackNova · Coded in the cosmos
+            © {new Date().getFullYear()} HackNova powered by 3LC · Three lines of code
           </div>
 
           <button

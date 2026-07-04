@@ -144,7 +144,7 @@ export default function Navbar() {
           >
             {indicator && (
               <motion.div
-                className="absolute top-1/2 -translate-y-1/2 h-8 rounded-full bg-white/[0.06] border border-white/10"
+                className="absolute top-1/2 -translate-y-1/2 h-8 rounded-full bg-white/[0.06] border border-space-violet/40"
                 animate={{ left: indicator.left, width: indicator.width }}
                 transition={{ type: "spring", stiffness: 380, damping: 32 }}
               />
@@ -168,7 +168,7 @@ export default function Navbar() {
                 {activeTab === item && (
                   <motion.span
                     layoutId="active-dot"
-                    className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-space-purple shadow-[0_0_8px_rgba(139,92,246,0.9)]"
+                    className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-space-purple shadow-[0_0_8px_rgba(212,175,55,0.9)]"
                   />
                 )}
               </button>
@@ -194,8 +194,8 @@ export default function Navbar() {
               className="hidden lg:inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.2em] uppercase text-white/45 hover:text-white transition-colors"
               aria-label="Open command palette"
             >
-              <kbd className="border border-white/10 rounded px-1.5 py-0.5">⌘</kbd>
-              <kbd className="border border-white/10 rounded px-1.5 py-0.5">K</kbd>
+              <kbd className="border border-space-violet/40 rounded px-1.5 py-0.5">⌘</kbd>
+              <kbd className="border border-space-violet/40 rounded px-1.5 py-0.5">K</kbd>
             </button>
 
             <Link

@@ -147,15 +147,15 @@ export default function Admin() {
     if (!isAuthenticated) {
         return (
             <div className="min-h-screen pt-32 pb-20 px-4 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#8B5CF6]/5 rounded-full blur-[100px] pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D4AF37]/5 rounded-full blur-[100px] pointer-events-none" />
 
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="max-w-md w-full bg-black/40 backdrop-blur-md p-8 rounded-2xl border border-white/10 relative z-10"
+                    className="max-w-md w-full bg-black/40 backdrop-blur-md p-8 rounded-2xl border border-space-violet/40 relative z-10"
                 >
                     <div className="flex justify-center mb-6">
-                        <Shield className="w-16 h-16 text-[#8B5CF6]" />
+                        <Shield className="w-16 h-16 text-[#D4AF37]" />
                     </div>
                     <h1 className="text-3xl font-orbitron text-center mb-8 tracking-wider">COMMAND CENTER</h1>
 
@@ -168,7 +168,7 @@ export default function Admin() {
                                     type="password"
                                     value={key}
                                     onChange={(e) => setKey(e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg pl-11 pr-4 py-3 text-white focus:outline-none focus:border-[#8B5CF6] transition-colors tracking-widest font-mono"
+                                    className="w-full bg-white/5 border border-space-violet/40 rounded-lg pl-11 pr-4 py-3 text-white focus:outline-none focus:border-[#D4AF37] transition-colors tracking-widest font-mono"
                                     placeholder="Enter Key"
                                     autoComplete="off"
                                 />
@@ -179,7 +179,7 @@ export default function Admin() {
 
                         <button
                             type="submit"
-                            className="w-full bg-[#8B5CF6] hover:bg-[#7C3AED] text-black font-bold font-orbitron py-3 rounded-lg transition-colors tracking-wider"
+                            className="w-full bg-[#D4AF37] hover:bg-[#B8972E] text-black font-bold font-orbitron py-3 rounded-lg transition-colors tracking-wider"
                         >
                             AUTHENTICATE
                         </button>
@@ -200,20 +200,20 @@ export default function Admin() {
                     <button
                         onClick={fetchDashboardData}
                         title="Refresh Data"
-                        className="p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 transition-colors"
+                        className="p-3 bg-white/5 hover:bg-white/10 rounded-lg border border-space-violet/40 transition-colors"
                     >
-                        <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin text-[#8B5CF6]' : 'text-gray-300'}`} />
+                        <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin text-[#D4AF37]' : 'text-gray-300'}`} />
                     </button>
                     <button
                         onClick={handleDownloadCSV}
-                        className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 transition-colors font-rajdhani hover:text-[#8B5CF6]"
+                        className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 rounded-lg border border-space-violet/40 transition-colors font-rajdhani hover:text-[#D4AF37]"
                     >
                         <Download className="w-5 h-5" />
                         <span>EXPORT CSV</span>
                     </button>
                     <button
                         onClick={() => setIsAuthenticated(false)}
-                        className="px-6 py-3 bg-[#8B5CF6]/10 hover:bg-[#8B5CF6] hover:text-white text-[#8B5CF6] rounded-lg border border-[#8B5CF6]/30 transition-colors font-rajdhani font-bold"
+                        className="px-6 py-3 bg-[#D4AF37]/10 hover:bg-[#D4AF37] hover:text-white text-[#D4AF37] rounded-lg border border-[#D4AF37]/30 transition-colors font-rajdhani font-bold"
                     >
                         LOGOUT
                     </button>
@@ -221,25 +221,25 @@ export default function Admin() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                <div className="bg-black/40 border border-white/10 rounded-xl p-6 flex flex-col items-center justify-center text-center group hover:border-[#8B5CF6]/30 transition-colors">
-                    <Users className="w-8 h-8 text-[#8B5CF6] mb-4 group-hover:scale-110 transition-transform" />
+                <div className="bg-black/40 border border-space-violet/40 rounded-xl p-6 flex flex-col items-center justify-center text-center group hover:border-[#D4AF37]/30 transition-colors">
+                    <Users className="w-8 h-8 text-[#D4AF37] mb-4 group-hover:scale-110 transition-transform" />
                     <h3 className="text-gray-400 font-rajdhani text-sm uppercase tracking-widest mb-1">Total Teams</h3>
                     <p className="text-4xl font-orbitron text-white">{stats.teams}</p>
                 </div>
-                <div className="bg-black/40 border border-white/10 rounded-xl p-6 flex flex-col items-center justify-center text-center group hover:border-[#8B5CF6]/30 transition-colors">
-                    <BarChart3 className="w-8 h-8 text-[#8B5CF6] mb-4 group-hover:scale-110 transition-transform" />
+                <div className="bg-black/40 border border-space-violet/40 rounded-xl p-6 flex flex-col items-center justify-center text-center group hover:border-[#D4AF37]/30 transition-colors">
+                    <BarChart3 className="w-8 h-8 text-[#D4AF37] mb-4 group-hover:scale-110 transition-transform" />
                     <h3 className="text-gray-400 font-rajdhani text-sm uppercase tracking-widest mb-1">Total Web Views</h3>
                     <p className="text-4xl font-orbitron text-white">{stats.visitors}</p>
                 </div>
-                <div className="bg-black/40 border border-white/10 rounded-xl p-6 flex flex-col items-center justify-center text-center group hover:border-[#8B5CF6]/30 transition-colors">
+                <div className="bg-black/40 border border-space-violet/40 rounded-xl p-6 flex flex-col items-center justify-center text-center group hover:border-[#D4AF37]/30 transition-colors">
                     <Settings className="w-8 h-8 text-space-nebula mb-4 group-hover:scale-110 transition-transform" />
                     <h3 className="text-gray-400 font-rajdhani text-sm uppercase tracking-widest mb-1">System Status</h3>
                     <p className="text-xl mt-2 font-orbitron text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]">ONLINE</p>
                 </div>
             </div>
 
-            <div className="bg-black/40 border border-white/10 rounded-xl overflow-hidden">
-                <div className="p-6 border-b border-white/10 bg-white/5">
+            <div className="bg-black/40 border border-space-violet/40 rounded-xl overflow-hidden">
+                <div className="p-6 border-b border-space-violet/40 bg-white/5">
                     <h2 className="text-2xl font-orbitron">REGISTERED CREWS</h2>
                 </div>
 
@@ -294,7 +294,7 @@ export default function Admin() {
             {editingRegistration && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
                     <div className="bg-[#080808] border border-white/20 rounded-2xl w-full max-w-4xl my-8 relative shadow-2xl">
-                        <div className="flex items-center justify-between p-6 border-b border-white/10">
+                        <div className="flex items-center justify-between p-6 border-b border-space-violet/40">
                             <h2 className="text-2xl font-orbitron font-bold">EDIT CREW DATA</h2>
                             <button onClick={() => setEditingRegistration(null)} className="text-gray-400 hover:text-white transition-colors">
                                 <X className="w-6 h-6" />
@@ -310,7 +310,7 @@ export default function Admin() {
                                         type="text"
                                         value={editingRegistration.team_name}
                                         onChange={(e) => handleEditChange('team_name', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#8B5CF6] font-rajdhani"
+                                        className="w-full bg-white/5 border border-space-violet/40 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37] font-rajdhani"
                                     />
                                 </div>
                                 <div>
@@ -319,7 +319,7 @@ export default function Admin() {
                                         required
                                         value={editingRegistration.member_count}
                                         onChange={(e) => handleEditChange('member_count', parseInt(e.target.value))}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#8B5CF6] font-rajdhani appearance-none"
+                                        className="w-full bg-white/5 border border-space-violet/40 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37] font-rajdhani appearance-none"
                                     >
                                         <option value={2}>2 Members</option>
                                         <option value={3}>3 Members</option>
@@ -329,43 +329,43 @@ export default function Admin() {
                             </div>
 
                             <div className="space-y-6">
-                                <h3 className="text-xl font-orbitron text-gray-300 border-b border-white/10 pb-2">CREW MEMBERS</h3>
+                                <h3 className="text-xl font-orbitron text-gray-300 border-b border-space-violet/40 pb-2">CREW MEMBERS</h3>
                                 {editingRegistration.membersList.slice(0, editingRegistration.member_count).map((member: any, idx: number) => (
-                                    <div key={idx} className="bg-white/5 border border-white/10 p-5 rounded-xl space-y-4">
-                                        <h4 className="font-orbitron text-sm text-[#8B5CF6]">CREW MEMBER {idx + 1}</h4>
+                                    <div key={idx} className="bg-white/5 border border-space-violet/40 p-5 rounded-xl space-y-4">
+                                        <h4 className="font-orbitron text-sm text-[#D4AF37]">CREW MEMBER {idx + 1}</h4>
                                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                            <input required type="text" value={member.name} onChange={(e) => handleEditMemberChange(idx, 'name', e.target.value)} placeholder="Name" className="w-full bg-black border border-white/10 rounded-lg px-4 py-2 text-white" />
-                                            <input required type="email" value={member.email} onChange={(e) => handleEditMemberChange(idx, 'email', e.target.value)} placeholder="Email" className="w-full bg-black border border-white/10 rounded-lg px-4 py-2 text-white" />
-                                            <input required type="text" value={member.phone} onChange={(e) => handleEditMemberChange(idx, 'phone', e.target.value)} placeholder="Phone" className="w-full bg-black border border-white/10 rounded-lg px-4 py-2 text-white" />
+                                            <input required type="text" value={member.name} onChange={(e) => handleEditMemberChange(idx, 'name', e.target.value)} placeholder="Name" className="w-full bg-black border border-space-violet/40 rounded-lg px-4 py-2 text-white" />
+                                            <input required type="email" value={member.email} onChange={(e) => handleEditMemberChange(idx, 'email', e.target.value)} placeholder="Email" className="w-full bg-black border border-space-violet/40 rounded-lg px-4 py-2 text-white" />
+                                            <input required type="text" value={member.phone} onChange={(e) => handleEditMemberChange(idx, 'phone', e.target.value)} placeholder="Phone" className="w-full bg-black border border-space-violet/40 rounded-lg px-4 py-2 text-white" />
 
-                                            <select required value={member.role || ""} onChange={(e) => handleEditMemberChange(idx, 'role', e.target.value)} className="w-full bg-black border border-white/10 rounded-lg px-4 py-2 text-white appearance-none">
+                                            <select required value={member.role || ""} onChange={(e) => handleEditMemberChange(idx, 'role', e.target.value)} className="w-full bg-black border border-space-violet/40 rounded-lg px-4 py-2 text-white appearance-none">
                                                 <option value="" disabled>Select Role</option>
                                                 <option value="frontend">Frontend</option><option value="backend">Backend</option><option value="fullstack">Fullstack</option><option value="ai">AI</option><option value="design">Design</option>
                                             </select>
 
-                                            <input required type="text" value={member.college || ""} onChange={(e) => handleEditMemberChange(idx, 'college', e.target.value)} placeholder="College" className="w-full bg-black border border-white/10 rounded-lg px-4 py-2 text-white" />
+                                            <input required type="text" value={member.college || ""} onChange={(e) => handleEditMemberChange(idx, 'college', e.target.value)} placeholder="College" className="w-full bg-black border border-space-violet/40 rounded-lg px-4 py-2 text-white" />
 
-                                            <select required value={member.gender || ""} onChange={(e) => handleEditMemberChange(idx, 'gender', e.target.value)} className="w-full bg-black border border-white/10 rounded-lg px-4 py-2 text-white appearance-none">
+                                            <select required value={member.gender || ""} onChange={(e) => handleEditMemberChange(idx, 'gender', e.target.value)} className="w-full bg-black border border-space-violet/40 rounded-lg px-4 py-2 text-white appearance-none">
                                                 <option value="" disabled>Gender</option>
                                                 <option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option>
                                             </select>
 
-                                            <select required value={member.year || ""} onChange={(e) => handleEditMemberChange(idx, 'year', e.target.value)} className="w-full bg-black border border-white/10 rounded-lg px-4 py-2 text-white appearance-none">
+                                            <select required value={member.year || ""} onChange={(e) => handleEditMemberChange(idx, 'year', e.target.value)} className="w-full bg-black border border-space-violet/40 rounded-lg px-4 py-2 text-white appearance-none">
                                                 <option value="" disabled>Year</option>
                                                 <option value="1st Year">1st Year</option><option value="2nd Year">2nd Year</option><option value="3rd Year">3rd Year</option><option value="4th Year">4th Year</option><option value="Other">Other</option>
                                             </select>
 
-                                            <input required type="text" value={member.course || ""} onChange={(e) => handleEditMemberChange(idx, 'course', e.target.value)} placeholder="Course & Branch" className="w-full bg-black border border-white/10 rounded-lg px-4 py-2 text-white lg:col-span-2" />
+                                            <input required type="text" value={member.course || ""} onChange={(e) => handleEditMemberChange(idx, 'course', e.target.value)} placeholder="Course & Branch" className="w-full bg-black border border-space-violet/40 rounded-lg px-4 py-2 text-white lg:col-span-2" />
                                         </div>
                                     </div>
                                 ))}
                             </div>
 
-                            <div className="pt-4 border-t border-white/10 flex justify-end gap-4">
+                            <div className="pt-4 border-t border-space-violet/40 flex justify-end gap-4">
                                 <button type="button" onClick={() => setEditingRegistration(null)} className="px-6 py-3 font-rajdhani border border-white/20 rounded-lg hover:bg-white/5 transition-colors">
                                     CANCEL
                                 </button>
-                                <button type="submit" disabled={isSaving} className="px-6 py-3 font-rajdhani bg-[#8B5CF6] hover:bg-[#7C3AED] text-white font-bold rounded-lg transition-colors flex items-center gap-2">
+                                <button type="submit" disabled={isSaving} className="px-6 py-3 font-rajdhani bg-[#D4AF37] hover:bg-[#B8972E] text-white font-bold rounded-lg transition-colors flex items-center gap-2">
                                     <Save className="w-4 h-4" />
                                     {isSaving ? 'SAVING...' : 'SAVE CHANGES'}
                                 </button>

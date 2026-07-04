@@ -78,7 +78,7 @@ export default function IntroSplash() {
           {/* Top meta row */}
           <div className="absolute top-6 left-6 right-6 flex items-baseline justify-between font-mono text-[10px] tracking-[0.3em] uppercase text-white/55">
             <span>HackNova · 2026</span>
-            <span className="hidden sm:block">Aug 08 - 09</span>
+            <span className="hidden sm:block">Aug 22 - 23</span>
           </div>
 
           {/* Optional center wordmark - extremely quiet */}

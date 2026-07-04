@@ -13,7 +13,7 @@ export const FAQS: FAQItem[] = [
   {
     question: "Who can participate in HackNova 2026?",
     answer:
-      "HackNova 2026 is open to all students, developers, designers, and AI enthusiasts across India. You can be a beginner or a seasoned coder - both are welcome.",
+      "HackNova 2026 is exclusive for students of IIT Tirupati, IISER Tirupati, and neighbouring institutes. You can be a beginner or a seasoned coder - both are welcome.",
   },
   {
     question: "Is HackNova a team or solo hackathon?",
@@ -43,11 +43,11 @@ export const FAQS: FAQItem[] = [
   {
     question: "Where is HackNova 2026 held?",
     answer:
-      "HackNova 2026 is held offline at IIT Tirupati, Andhra Pradesh, India on 8 - 9 August 2026.",
+      "HackNova 2026 is held offline at IIT Tirupati, Andhra Pradesh, India on 22 - 23 August 2026.",
   },
   {
     question: "What is the prize pool for HackNova 2026?",
     answer:
-      "The total prize pool is ₹35,000 along with sponsored prizes, free .xyz domain registration for every participant, certificates, and goodies.",
+      "The total prize pool is ₹50,000 along with sponsored prizes, free .xyz domain registration for every participant, certificates, and goodies.",
   },
 ];

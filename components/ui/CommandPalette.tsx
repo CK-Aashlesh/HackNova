@@ -225,7 +225,7 @@ export default function CommandPalette() {
             className="w-full max-w-xl overflow-hidden rounded-xl border border-white/15 bg-[#06041a]/95 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]"
           >
             {/* Header / prompt */}
-            <div className="flex items-center gap-3 border-b border-white/10 px-4 sm:px-5 h-14">
+            <div className="flex items-center gap-3 border-b border-space-violet/40 px-4 sm:px-5 h-14">
               <span className="font-mono text-xs text-white/55 select-none">
                 hacknova:~$
               </span>
@@ -238,7 +238,7 @@ export default function CommandPalette() {
                 spellCheck={false}
                 autoComplete="off"
               />
-              <kbd className="hidden sm:inline-block font-mono text-[10px] tracking-[0.2em] uppercase text-white/45 border border-white/10 rounded px-1.5 py-0.5">
+              <kbd className="hidden sm:inline-block font-mono text-[10px] tracking-[0.2em] uppercase text-white/45 border border-space-violet/40 rounded px-1.5 py-0.5">
                 ESC
               </kbd>
             </div>
@@ -312,15 +312,15 @@ export default function CommandPalette() {
             </ul>
 
             {/* Footer */}
-            <div className="flex items-center justify-between border-t border-white/10 px-4 sm:px-5 h-10 font-mono text-[10px] tracking-[0.22em] uppercase text-white/45">
+            <div className="flex items-center justify-between border-t border-space-violet/40 px-4 sm:px-5 h-10 font-mono text-[10px] tracking-[0.22em] uppercase text-white/45">
               <div className="flex items-center gap-3">
                 <span>
-                  <kbd className="border border-white/10 rounded px-1.5 py-0.5 mr-1.5">↑</kbd>
-                  <kbd className="border border-white/10 rounded px-1.5 py-0.5">↓</kbd>{" "}
+                  <kbd className="border border-space-violet/40 rounded px-1.5 py-0.5 mr-1.5">↑</kbd>
+                  <kbd className="border border-space-violet/40 rounded px-1.5 py-0.5">↓</kbd>{" "}
                   navigate
                 </span>
                 <span className="hidden sm:inline">
-                  <kbd className="border border-white/10 rounded px-1.5 py-0.5">↵</kbd> run
+                  <kbd className="border border-space-violet/40 rounded px-1.5 py-0.5">↵</kbd> run
                 </span>
               </div>
               <div className="flex items-center gap-2">
@@ -330,8 +330,8 @@ export default function CommandPalette() {
                   </span>
                 )}
                 <span>
-                  <kbd className="border border-white/10 rounded px-1.5 py-0.5">⌘K</kbd> /{" "}
-                  <kbd className="border border-white/10 rounded px-1.5 py-0.5">?</kbd>
+                  <kbd className="border border-space-violet/40 rounded px-1.5 py-0.5">⌘K</kbd> /{" "}
+                  <kbd className="border border-space-violet/40 rounded px-1.5 py-0.5">?</kbd>
                 </span>
               </div>
             </div>

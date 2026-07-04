@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
     ? isRegistered
       ? "I just registered."
       : "We're going to HackNova."
-    : "A national AI hackathon.";
+    : "An exclusive AI hackathon.";
   const subhead = team
     ? team.toUpperCase()
     : "HACKNOVA · 2026";
@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
           flexDirection: "column",
           padding: "60px 72px",
           background:
-            "radial-gradient(circle at 25% 20%, rgba(139,92,246,0.32) 0%, transparent 55%), radial-gradient(circle at 80% 90%, rgba(103,232,249,0.22) 0%, transparent 55%), #050310",
+            "radial-gradient(circle at 25% 20%, rgba(212,175,55,0.32) 0%, transparent 55%), radial-gradient(circle at 80% 90%, rgba(241,208,138,0.22) 0%, transparent 55%), #0D0D0D",
           color: "white",
           fontFamily: "system-ui, -apple-system, sans-serif",
           position: "relative",
@@ -62,7 +62,7 @@ export async function GET(req: NextRequest) {
           }}
         >
           <span>HackNova · 2026</span>
-          <span>Aug 08 - 09 · IIT Tirupati</span>
+          <span>Aug 22 - 23 · IIT Tirupati</span>
         </div>
 
         {/* Centered block */}
@@ -83,7 +83,7 @@ export async function GET(req: NextRequest) {
                 fontSize: 22,
                 letterSpacing: 5,
                 textTransform: "uppercase",
-                color: "rgba(192,132,252,0.95)",
+                color: "rgba(212,175,55,0.95)",
                 marginBottom: 24,
               }}
             >
@@ -92,8 +92,8 @@ export async function GET(req: NextRequest) {
                   width: 10,
                   height: 10,
                   borderRadius: 999,
-                  background: "#C084FC",
-                  boxShadow: "0 0 20px rgba(192,132,252,0.8)",
+                  background: "#D4AF37",
+                  boxShadow: "0 0 20px rgba(212,175,55,0.8)",
                 }}
               />
               {isRegistered ? "Confirmed · Team" : "Team"}

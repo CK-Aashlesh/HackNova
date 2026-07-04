@@ -3,12 +3,12 @@ import { redirect } from 'next/navigation';
 import { SITE } from '@/lib/site';
 
 export const metadata: Metadata = {
-    title: 'Register for HackNova 2026',
+    title: 'Register for HackNova powered by 3LC',
     description:
-        'Register your team for HackNova 2026 — a free 24-hour national AI hackathon at IIT Tirupati, Aug 8 — 9, 2026.',
+        'Register your team for HackNova powered by 3LC - a free 24-hour AI hackathon at IIT Tirupati, August 22 - 23, 2026, exclusive for IIT Tirupati, IISER Tirupati, and neighbouring institutes.',
     alternates: { canonical: '/register' },
     robots: {
-        // Page is just a redirect — let crawlers follow but don't index the empty body
+        // Page is just a redirect - let crawlers follow but don't index the empty body
         index: false,
         follow: true,
     },

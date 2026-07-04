@@ -1,7 +1,13 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 type Item = {
   time: string;
@@ -21,57 +27,125 @@ const schedule: Item[] = [
 
 export default function Timeline() {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 70%", "end 70%"],
-  });
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const spineRef = useRef<HTMLDivElement | null>(null);
+
+  useGSAP(
+    () => {
+      // 1. Heading text slide-in
+      gsap.from(".timeline-header span, .timeline-header h2", {
+        opacity: 0,
+        y: 20,
+        duration: 1.0,
+        ease: "power3.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".timeline-header",
+          start: "top 85%",
+        },
+      });
+
+      // 2. Scroll-linked Spine draw-in
+      gsap.fromTo(
+        ".timeline-spine-glow",
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          transformOrigin: "top center",
+          ease: "none",
+          scrollTrigger: {
+            trigger: spineRef.current,
+            start: "top 65%",
+            end: "bottom 65%",
+            scrub: true,
+          },
+        }
+      );
+
+      // 3. Staggered card reveals with side-based entrance (3D rotate & slide)
+      const cards = gsap.utils.toArray<HTMLElement>(".timeline-card-wrapper");
+      
+      cards.forEach((card, idx) => {
+        const isEven = idx % 2 === 0;
+        
+        // Staggered card entrance
+        gsap.from(card, {
+          opacity: 0,
+          x: isEven ? 60 : -60,
+          rotationY: isEven ? -15 : 15,
+          duration: 1.1,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+        });
+
+        // Interactive highlight as node crosses active scroll horizon
+        const node = card.querySelector(".timeline-node");
+        const cardInner = card.querySelector(".timeline-card-inner");
+
+        if (node && cardInner) {
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: card,
+              start: "top 65%",
+              end: "bottom 55%",
+              toggleActions: "play reverse play reverse",
+            },
+          })
+            .to(node, {
+              scale: 1.25,
+              borderColor: "#D4AF37",
+              backgroundColor: "#D4AF37",
+              boxShadow: "0 0 16px rgba(212,175,55,0.8)",
+              duration: 0.3,
+            })
+            .to(
+              cardInner,
+              {
+                borderColor: "#D4AF37",
+                boxShadow: "0 0 25px rgba(212,175,55,0.12)",
+                duration: 0.3,
+              },
+              0
+            );
+        }
+      });
+    },
+    { scope: containerRef }
+  );
 
   // Find first index of day 2 to mark a divider
   const firstDay2 = schedule.findIndex((s) => s.day === 2);
 
   return (
-    <section id="schedule" className="py-28 md:py-32 relative overflow-hidden">
+    <section ref={containerRef} id="schedule" className="py-28 md:py-32 relative overflow-hidden bg-[#0d0d0d]">
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div
           className="absolute top-[40%] right-[-10%] w-[450px] h-[300px] blur-[100px] opacity-50"
           style={{
             background:
-              "radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 60%)",
+              "radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 60%)",
           }}
         />
       </div>
 
       <div className="container mx-auto px-6 max-w-4xl relative z-10">
         {/* Heading */}
-        <div className="text-center mb-20">
-          <motion.span
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="eyebrow mb-5 mx-auto"
-          >
+        <div className="timeline-header text-center mb-20">
+          <span className="eyebrow mb-5 mx-auto">
             The Schedule
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="font-display text-[44px] sm:text-[60px] md:text-[80px] font-black leading-[0.92] uppercase tracking-[-0.03em]"
-          >
+          </span>
+          <h2 className="font-display text-[44px] sm:text-[60px] md:text-[80px] font-black leading-[0.92] uppercase tracking-[-0.03em]">
             <span className="text-white">EVENT </span>
             <span className="text-gradient-purple">TIMELINE</span>
-          </motion.h2>
+          </h2>
         </div>
 
-        <div ref={containerRef} className="relative">
+        <div ref={spineRef} className="relative">
           {/* Spine: faint base + scroll-driven gradient overlay */}
-          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-px md:-translate-x-1/2 bg-white/10" />
-          <motion.div
-            style={{ height: lineHeight }}
-            className="absolute left-[28px] md:left-1/2 top-0 w-px md:-translate-x-1/2 bg-gradient-to-b from-space-purple via-space-purple-glow to-cyan-glow shadow-[0_0_12px_rgba(139,92,246,0.7)]"
-          />
+          <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-px bg-white/10" />
+          <div className="timeline-spine-glow absolute left-[28px] md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-space-purple via-[#F1D08A] to-cyan-glow shadow-[0_0_12px_rgba(212,175,55,0.7)]" />
 
           <div className="space-y-12">
             {schedule.map((item, index) => {
@@ -79,47 +153,34 @@ export default function Timeline() {
               return (
                 <div key={index}>
                   {showDay && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      className="relative mb-8"
-                    >
+                    <div className="relative mb-8 select-none">
                       <div className="ml-16 md:ml-0 md:flex md:justify-center">
                         <span className="inline-flex items-center gap-2 chip">
                           <span className="chip-dot" />
-                          {item.day === 1 ? "DAY 01 · AUGUST 8" : "DAY 02 · AUGUST 9"}
+                          {item.day === 1 ? "DAY 01 · AUGUST 22" : "DAY 02 · AUGUST 23"}
                         </span>
                       </div>
-                    </motion.div>
+                    </div>
                   )}
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-10% 0px" }}
-                    transition={{ duration: 0.6, delay: 0.05 * (index % 3) }}
-                    className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-0 ${
-                      index % 2 === 0 ? "md:flex-row-reverse" : ""
+                  <div
+                    className={`timeline-card-wrapper relative flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-0 ${
+                      index % 2 === 0 ? "md:justify-end" : "md:justify-start"
                     }`}
+                    style={{ perspective: 1000 }}
                   >
                     {/* Node */}
-                    <div className="absolute left-[28px] md:left-1/2 -translate-x-[11.5px] md:-translate-x-1/2 mt-1.5 md:mt-0 w-6 h-6 flex items-center justify-center z-10">
-                      <span
-                        className="absolute w-6 h-6 rounded-full bg-space-purple/20 animate-ping"
-                        style={{ animationDuration: "3s" }}
-                      />
-                      <span className="absolute w-3.5 h-3.5 rounded-full bg-space-black border border-space-purple" />
-                      <span className="absolute w-1.5 h-1.5 rounded-full bg-space-purple shadow-[0_0_8px_rgba(139,92,246,0.9)]" />
+                    <div className="timeline-node absolute left-[16px] md:left-1/2 md:ml-[-12px] mt-1.5 md:mt-0 w-6 h-6 flex items-center justify-center z-10 rounded-full border border-space-purple bg-space-black transition-all duration-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-space-purple" />
                     </div>
 
-                    {/* Card */}
+                    {/* Card container */}
                     <div
                       className={`w-full md:w-1/2 pl-16 md:pl-0 ${
                         index % 2 === 0 ? "md:pl-12" : "md:pr-12 text-left md:text-right"
                       }`}
                     >
-                      <div className="group glass-card glass-card-hover border-gradient rounded-2xl p-6 hover-lift transition-all duration-300 relative overflow-hidden">
+                      <div className="timeline-card-inner group glass-card glass-card-hover border border-space-violet/25 hover:border-space-purple/30 rounded-2xl p-6 transition-all duration-300 relative overflow-hidden">
                         <div className="relative z-10">
                           <div className="text-space-purple-glow font-mono text-[10px] uppercase font-bold tracking-[0.2em] mb-2">
                             {item.time}
@@ -133,7 +194,7 @@ export default function Timeline() {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
               );
             })}

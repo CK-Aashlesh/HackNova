@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useRef, type ReactNode } from "react";
+import gsap from "gsap";
 
 type Props = {
   children: ReactNode;
@@ -13,48 +13,85 @@ type Props = {
 export default function TiltCard({
   children,
   className = "",
-  intensity = 8,
+  intensity = 10,
   glare = true,
 }: Props) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 240, damping: 20, mass: 0.4 });
-  const sy = useSpring(y, { stiffness: 240, damping: 20, mass: 0.4 });
-  const rotateX = useTransform(sy, [-0.5, 0.5], [intensity, -intensity]);
-  const rotateY = useTransform(sx, [-0.5, 0.5], [-intensity, intensity]);
-  const glareX = useTransform(sx, [-0.5, 0.5], ["20%", "80%"]);
-  const glareY = useTransform(sy, [-0.5, 0.5], ["20%", "80%"]);
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const glareRef = useRef<HTMLDivElement | null>(null);
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const r = ref.current?.getBoundingClientRect();
-    if (!r) return;
-    x.set((e.clientX - r.left) / r.width - 0.5);
-    y.set((e.clientY - r.top) / r.height - 0.5);
+    const card = cardRef.current;
+    if (!card) return;
+
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+
+    const px = x / r.width; // 0 to 1
+    const py = y / r.height; // 0 to 1
+
+    const rx = (py - 0.5) * -intensity * 2; // tilt around X axis based on Y pos
+    const ry = (px - 0.5) * intensity * 2;  // tilt around Y axis based on X pos
+
+    gsap.to(card, {
+      rotateX: rx,
+      rotateY: ry,
+      transformPerspective: 1000,
+      duration: 0.5,
+      ease: "power2.out",
+      overwrite: "auto",
+    });
+
+    if (glare && glareRef.current) {
+      gsap.to(glareRef.current, {
+        opacity: 1,
+        background: `radial-gradient(350px circle at ${px * 100}% ${py * 100}%, rgba(212,175,55,0.18), transparent 60%)`,
+        duration: 0.5,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    }
   };
 
   const onLeave = () => {
-    x.set(0);
-    y.set(0);
+    const card = cardRef.current;
+    if (!card) return;
+
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.8,
+      ease: "power3.out",
+      overwrite: "auto",
+    });
+
+    if (glare && glareRef.current) {
+      gsap.to(glareRef.current, {
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
+    }
   };
 
   return (
-    <motion.div
-      ref={ref}
+    <div
+      ref={cardRef}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      className={`relative perspective-1000 ${className}`}
+      style={{ transformStyle: "preserve-3d" }}
+      className={`relative select-none ${className}`}
     >
-      {children}
+      <div style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }} className="h-full w-full">
+        {children}
+      </div>
       {glare && (
-        <motion.div
-          className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{
-            background: `radial-gradient(400px circle at ${glareX} ${glareY}, rgba(192,132,252,0.18), transparent 50%)`,
-          }}
+        <div
+          ref={glareRef}
+          className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300 z-20"
         />
       )}
-    </motion.div>
+    </div>
   );
 }

@@ -4,11 +4,11 @@ import { SITE } from '@/lib/site';
 /**
  * Web app manifest served at /manifest.webmanifest.
  * Improves PWA installability scores in Lighthouse and the Chrome
- * "Add to Home Screen" prompt — both signals Google uses for mobile UX.
+ * "Add to Home Screen" prompt - both signals Google uses for mobile UX.
  */
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: 'HackNova 2026 — National AI Hackathon',
+        name: 'HackNova 2026 - AI Hackathon',
         short_name: 'HackNova',
         description: SITE.shortDescription,
         start_url: '/',

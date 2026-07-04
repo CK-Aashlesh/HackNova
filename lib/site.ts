@@ -8,17 +8,17 @@
 
 export const SITE = {
   name: "HackNova",
-  brand: "HackNova 2026",
+  brand: "HackNova powered by 3LC",
   shortDescription:
-    "A 24-hour national AI hackathon by Sphere Hive at IIT Tirupati.",
+    "A 24-hour AI hackathon by Sphere Hive at IIT Tirupati, exclusive for IIT Tirupati, IISER Tirupati, and neighbouring institutes.",
   longDescription:
-    "HackNova 2026 is a 24-hour national level Artificial Intelligence hackathon hosted by Sphere Hive at IIT Tirupati. Teams compete on a single data-centric AI challenge powered by 3LC.ai - improving model accuracy by improving the dataset itself.",
+    "HackNova 2026 is a 24-hour Artificial Intelligence hackathon hosted by Sphere Hive at IIT Tirupati, exclusive for IIT Tirupati, IISER Tirupati, and neighbouring institutes. Teams compete on a single data-centric AI challenge powered by 3LC.ai - improving model accuracy by improving the dataset itself.",
   // The canonical, public, production URL. Override in env if you change domains.
   url:
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
     "https://hacknova.in",
   locale: "en_IN",
-  themeColor: "#030207",
+  themeColor: "#D4AF37",
 
   organisation: {
     name: "Sphere Hive",
@@ -32,8 +32,8 @@ export const SITE = {
 
   event: {
     name: "HackNova 2026",
-    startDate: "2026-08-08T09:00:00+05:30",
-    endDate: "2026-08-09T13:00:00+05:30",
+    startDate: "2026-08-22T09:00:00+05:30",
+    endDate: "2026-08-23T13:00:00+05:30",
     eventStatus: "https://schema.org/EventScheduled",
     attendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     venue: {
@@ -46,10 +46,10 @@ export const SITE = {
     },
     registerUrl:
       "https://unstop.com/p/hacknova-sphere-hive-kvg-college-of-engineering-sullia-1693176",
-    prizePool: "INR 35,000",
+    prizePool: "INR 50,000",
     keywords: [
       "AI Hackathon",
-      "National Hackathon 2026",
+      "AI Hackathon 2026",
       "IIT Tirupati Hackathon",
       "Andhra Pradesh tech fest 2026",
       "Data-centric AI competition",
