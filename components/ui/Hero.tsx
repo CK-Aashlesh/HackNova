@@ -166,7 +166,7 @@ export default function Hero() {
     <section
       ref={containerRef}
       id="home"
-      className="relative min-h-screen w-full overflow-hidden bg-black"
+      className="relative min-h-dvh w-full overflow-hidden bg-black"
     >
       {/* ===== BACKGROUND VIDEO & IMAGE FIT ON THE RIGHT SIDE ===== */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
@@ -184,8 +184,8 @@ export default function Hero() {
         </div>
         
         {/* Ambient Cosmic Shade layers to protect text readability and blend image edges */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/95 to-transparent w-full md:w-[75%] pointer-events-none z-10" />
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-space-black to-transparent h-[45%] pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 lg:via-black/95 to-black/35 lg:to-transparent w-full lg:w-[75%] pointer-events-none z-10" />
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-space-black via-space-black/85 to-transparent h-[60%] lg:h-[45%] pointer-events-none z-10" />
       </div>
 
       {/* ===== AMBIENT FLOATING SPACE PARTICLES OVERLAY ===== */}
@@ -209,9 +209,9 @@ export default function Hero() {
       {/* ===== CONTENT ===== */}
       <div
         ref={contentRef}
-        className="relative z-10 min-h-screen flex flex-col justify-end"
+        className="relative z-10 min-h-dvh flex flex-col justify-end"
       >
-        <div className="px-6 md:px-12 lg:px-20 pb-20 sm:pb-24 md:pb-28 max-w-3xl">
+        <div className="px-6 sm:px-12 lg:px-20 pb-16 sm:pb-24 md:pb-28 max-w-3xl">
           {/* Accessible heading */}
           <h1 className="sr-only">
             HackNova 2026 - AI Hackathon at IIT Tirupati · 24 hours · August 22 - 23, 2026
@@ -219,7 +219,7 @@ export default function Hero() {
 
           {/* Small subtitle above title */}
           <div className="overflow-hidden mb-3.5">
-            <span className="hero-subtitle-line block font-mono text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-[#D4AF37]/80">
+            <span className="hero-subtitle-line block font-mono text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.16em] sm:tracking-[0.22em] md:tracking-[0.25em] uppercase text-[#D4AF37]/80 whitespace-normal leading-normal">
               KVGCE SPHERE HIVE X DGITALWIZARDS IIT TIRUPATI
             </span>
           </div>
@@ -247,22 +247,22 @@ export default function Hero() {
           {/* Info pills */}
           <div
             ref={infoRef}
-            className="flex items-center gap-3 font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 mb-8"
+            className="flex flex-wrap items-center gap-y-2 gap-x-2 sm:gap-3 font-mono text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.25em] uppercase text-white/40 mb-8"
           >
             <span>24 Hours</span>
-            <span className="w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
+            <span className="hidden sm:inline w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
             <span>Aug 22–23 · 2026</span>
-            <span className="w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
+            <span className="hidden sm:inline w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
             <span>IIT Tirupati</span>
           </div>
 
           {/* CTAs */}
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
             <a
               href="https://unstop.com/p/hacknova-sphere-hive-kvg-college-of-engineering-sullia-1693176"
               target="_blank"
               rel="noopener noreferrer"
-              className="hero-cta-btn btn-primary group h-11 px-6 text-[11px] font-bold uppercase tracking-[0.15em]"
+              className="hero-cta-btn btn-primary group h-11 px-6 text-[11px] font-bold uppercase tracking-[0.15em] w-full sm:w-auto justify-center"
             >
               Register Now
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -272,7 +272,7 @@ export default function Hero() {
               onClick={() =>
                 document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
               }
-              className="hero-cta-btn btn-secondary h-11 px-6 text-[11px] font-bold uppercase tracking-[0.15em]"
+              className="hero-cta-btn btn-secondary h-11 px-6 text-[11px] font-bold uppercase tracking-[0.15em] w-full sm:w-auto justify-center"
             >
               Explore Tracks
             </button>
