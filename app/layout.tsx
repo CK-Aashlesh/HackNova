@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
 import StarField from '@/components/ui/StarField';
+import ParticleCanvas from '@/components/ui/ParticleCanvas';
 import ScrollProgress from '@/components/ui/ScrollProgress';
 import IntroSplash from '@/components/ui/IntroSplash';
 import CommandPalette from '@/components/ui/CommandPalette';
@@ -157,6 +158,7 @@ export default function RootLayout({
 
                 {/* Ambient cosmic backdrop */}
                 <StarField />
+                <ParticleCanvas />
 
                 {/* Top-of-page scroll progress bar */}
                 <ScrollProgress />

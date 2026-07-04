@@ -96,7 +96,7 @@ export default function Sponsors() {
     <section
       ref={containerRef}
       id="sponsors"
-      className="py-28 md:py-32 relative border-y border-space-violet/25 overflow-hidden bg-[#0a0a0a]"
+      className="py-28 md:py-32 relative border-y border-space-violet/25 overflow-hidden bg-transparent"
     >
       {/* Backdrop */}
       <div className="absolute inset-0 bg-space-charcoal/40" />

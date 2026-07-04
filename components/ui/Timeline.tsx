@@ -119,7 +119,7 @@ export default function Timeline() {
   const firstDay2 = schedule.findIndex((s) => s.day === 2);
 
   return (
-    <section ref={containerRef} id="schedule" className="py-28 md:py-32 relative overflow-hidden bg-[#0d0d0d]">
+    <section ref={containerRef} id="schedule" className="py-28 md:py-32 relative overflow-hidden bg-transparent">
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div
           className="absolute top-[40%] right-[-10%] w-[450px] h-[300px] blur-[100px] opacity-50"

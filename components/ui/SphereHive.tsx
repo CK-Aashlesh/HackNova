@@ -134,7 +134,7 @@ export default function SphereHive() {
   );
 
   return (
-    <section ref={containerRef} id="sphere-hive" className="py-28 md:py-36 relative bg-[#0a0a0a]">
+    <section ref={containerRef} id="sphere-hive" className="py-28 md:py-36 relative bg-transparent">
       <div className="container mx-auto px-6 max-w-6xl">
         {/* Top meta rule */}
         <div className="team-meta flex items-baseline justify-between border-t border-space-violet/40 pt-5 mb-14 md:mb-20 font-mono text-[10px] tracking-[0.3em] uppercase text-white/45">

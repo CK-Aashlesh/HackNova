@@ -73,7 +73,7 @@ export default function FAQ() {
   );
 
   return (
-    <section ref={containerRef} id="faq" className="py-28 md:py-36 relative bg-[#080808]">
+    <section ref={containerRef} id="faq" className="py-28 md:py-36 relative bg-transparent">
       <div className="container mx-auto px-6 max-w-4xl">
         {/* Meta rule */}
         <div className="faq-meta flex items-baseline justify-between border-t border-space-violet/40 pt-5 mb-14 md:mb-20 font-mono text-[10px] tracking-[0.3em] uppercase text-white/45">

@@ -63,7 +63,7 @@ export default function CTA() {
   );
 
   return (
-    <section ref={containerRef} className="cta-section-container py-20 sm:py-28 md:py-32 relative overflow-hidden border-t border-space-violet/40 bg-[#0d0d0d]">
+    <section ref={containerRef} className="cta-section-container py-20 sm:py-28 md:py-32 relative overflow-hidden border-t border-space-violet/40 bg-transparent">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(700px,90vw)] h-[min(700px,90vw)] bg-space-purple/10 rounded-full blur-[120px] pointer-events-none" />
 
