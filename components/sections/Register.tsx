@@ -70,12 +70,24 @@ export default function Register() {
             }
 
             setStatus('success');
+            // Notify The Curator mascot to celebrate
+            if (typeof window !== 'undefined') {
+                window.dispatchEvent(new CustomEvent('curator-event', {
+                    detail: { action: 'celebrate', message: "You're all set! Welcome aboard, crew! 🚀" }
+                }));
+            }
             setTimeout(() => {
                 router.push('/');
             }, 3000);
         } catch (err: any) {
             setStatus('error');
             setErrorMessage(err.message || 'Network error occurred');
+            // Notify The Curator mascot about the error
+            if (typeof window !== 'undefined') {
+                window.dispatchEvent(new CustomEvent('curator-event', {
+                    detail: { action: 'sad', message: "Oops... let's try again." }
+                }));
+            }
         }
     };
 

@@ -14,6 +14,7 @@ import {
 } from '@/components/seo/JsonLd';
 import { SITE, absoluteUrl } from '@/lib/site';
 import './globals.css';
+import TheCuratorLoader from '@/components/ui/TheCuratorLoader';
 
 const TITLE = `${SITE.brand} | AI Hackathon · 24 Hours · IIT Tirupati`;
 const DESCRIPTION =
@@ -176,6 +177,7 @@ export default function RootLayout({
                 <Footer />
 
                 <CommandPalette />
+                <TheCuratorLoader />
             </body>
         </html>
     );
