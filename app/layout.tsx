@@ -165,11 +165,14 @@ export default function RootLayout({
                 <ScrollProgress />
 
                 {/* Side rails */}
-                <div className="fixed bottom-20 left-10 [writing-mode:vertical-rl] rotate-180 text-[10px] font-mono tracking-[0.4em] uppercase text-white/25 z-40 pointer-events-none hidden lg:block">
+                <div className="fixed bottom-24 left-4 lg:left-10 lg:bottom-20 [writing-mode:vertical-rl] rotate-180 text-[8px] lg:text-[10px] font-mono tracking-[0.4em] uppercase text-white/20 lg:text-white/25 z-40 pointer-events-none">
                     Three · lines · of · code
                 </div>
-                <div className="fixed bottom-20 right-10 [writing-mode:vertical-rl] text-[10px] font-mono tracking-[0.4em] uppercase text-white/25 z-40 pointer-events-none hidden lg:block">
-                    Navigate · the · stars
+                <div className="fixed bottom-24 right-4 lg:right-10 lg:bottom-20 [writing-mode:vertical-rl] text-[8px] lg:text-[10px] font-mono tracking-[0.4em] uppercase text-white/20 lg:text-white/25 z-40 pointer-events-none flex items-center gap-1.5">
+                    <span className="lg:hidden">Navigate · the</span>
+                    <span className="hidden lg:inline">Navigate · the · stars</span>
+                    <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.8)] my-1 shrink-0 lg:hidden" />
+                    <span className="lg:hidden">stars</span>
                 </div>
 
                 <Navbar />

@@ -147,40 +147,46 @@ export default function ParticleCanvas() {
       // 3. ScrollTrigger Timelines
 
       // Timeline 1: Morph Sphere -> Columns
-      gsap.to(morph, {
-        state0to1: 1,
-        ease: "power1.inOut",
-        scrollTrigger: {
-          trigger: "#stats",
-          start: "top bottom",
-          end: "top 25%",
-          scrub: 1.2,
-        },
-      });
+      if (document.getElementById("stats")) {
+        gsap.to(morph, {
+          state0to1: 1,
+          ease: "power1.inOut",
+          scrollTrigger: {
+            trigger: "#stats",
+            start: "top bottom",
+            end: "top 25%",
+            scrub: 1.2,
+          },
+        });
+      }
 
       // Timeline 2: Morph Columns -> Nodes
-      gsap.to(morph, {
-        state1to2: 1,
-        ease: "power1.inOut",
-        scrollTrigger: {
-          trigger: "#challenge",
-          start: "top 95%",
-          end: "top 25%",
-          scrub: 1.2,
-        },
-      });
+      if (document.getElementById("challenge")) {
+        gsap.to(morph, {
+          state1to2: 1,
+          ease: "power1.inOut",
+          scrollTrigger: {
+            trigger: "#challenge",
+            start: "top 95%",
+            end: "top 25%",
+            scrub: 1.2,
+          },
+        });
+      }
 
       // Timeline 3: Morph Nodes -> Starfield
-      gsap.to(morph, {
-        state2to3: 1,
-        ease: "power1.inOut",
-        scrollTrigger: {
-          trigger: "#faq",
-          start: "top 95%",
-          end: "top 20%",
-          scrub: 1.2,
-        },
-      });
+      if (document.getElementById("faq")) {
+        gsap.to(morph, {
+          state2to3: 1,
+          ease: "power1.inOut",
+          scrollTrigger: {
+            trigger: "#faq",
+            start: "top 95%",
+            end: "top 20%",
+            scrub: 1.2,
+          },
+        });
+      }
 
       // Timeline 4: Pull all morphing particles forward on scroll (depth descent)
       gsap.to(morph, {

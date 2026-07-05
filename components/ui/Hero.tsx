@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Clock, Calendar, MapPin } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -107,6 +107,17 @@ export default function Hero() {
         },
       });
 
+      // Slow, subtle ambient background floating animation (idle floating)
+      gsap.to(".bg-float-wrapper", {
+        x: -15,
+        y: 10,
+        scale: 1.04,
+        duration: 18,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+
       // Ambient Floating Particles Setup (Set random coordinates & animate client-side only)
       gsap.set(".cosmic-dust-particle", {
         x: () => gsap.utils.random(-80, 80),
@@ -171,20 +182,20 @@ export default function Hero() {
       {/* ===== BACKGROUND VIDEO & IMAGE FIT ON THE RIGHT SIDE ===== */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
         <div className="hero-bg-scroll absolute right-0 top-0 h-[115%] w-full md:w-[70%] lg:w-[58%] pointer-events-none">
-          {/* Using hero-bg.mp4 video backdrop with hero-bg.png as fallback poster */}
-          <video
-            src="/hero-bg.mp4"
-            poster="/hero-bg.png"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hero-bg-media h-full w-full object-cover object-right scale-110"
-          />
+          {/* Subtle Float Wrapper */}
+          <div className="bg-float-wrapper w-full h-full">
+            {/* Using hero-bg.png as main cosmic backdrop */}
+            <img
+              src="/hero-bg.png"
+              alt="HackNova cosmic background"
+              className="hero-bg-media h-full w-full object-cover object-[70%_center] md:object-right scale-100 md:scale-110"
+              draggable={false}
+            />
+          </div>
         </div>
         
         {/* Ambient Cosmic Shade layers to protect text readability and blend image edges */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 lg:via-black/95 to-black/35 lg:to-transparent w-full lg:w-[75%] pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 md:via-black/90 lg:via-black/95 to-transparent w-full lg:w-[75%] pointer-events-none z-10" />
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-space-black via-space-black/85 to-transparent h-[60%] lg:h-[45%] pointer-events-none z-10" />
       </div>
 
@@ -209,29 +220,29 @@ export default function Hero() {
       {/* ===== CONTENT ===== */}
       <div
         ref={contentRef}
-        className="relative z-10 min-h-dvh flex flex-col justify-end"
+        className="relative z-10 min-h-dvh flex flex-col justify-end pt-32"
       >
-        <div className="px-6 sm:px-12 lg:px-20 pb-16 sm:pb-24 md:pb-28 max-w-3xl">
+        <div className="px-6 sm:px-12 lg:px-20 pb-20 xs:pb-24 sm:pb-24 md:pb-28 max-w-3xl">
           {/* Accessible heading */}
           <h1 className="sr-only">
             HackNova 2026 - AI Hackathon at IIT Tirupati · 24 hours · August 22 - 23, 2026
           </h1>
 
           {/* Small subtitle above title */}
-          <div className="overflow-hidden mb-3.5">
-            <span className="hero-subtitle-line block font-mono text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.16em] sm:tracking-[0.22em] md:tracking-[0.25em] uppercase text-[#D4AF37]/80 whitespace-normal leading-normal">
-              KVGCE SPHERE HIVE X DGITALWIZARDS IIT TIRUPATI
+          <div className="overflow-hidden mb-3.5 max-w-[240px] xs:max-w-none">
+            <span className="hero-subtitle-line block font-mono text-[9px] xs:text-[10px] sm:text-[9px] md:text-[10px] tracking-[0.16em] sm:tracking-[0.22em] md:tracking-[0.25em] uppercase text-[#D4AF37]/80 whitespace-normal leading-[1.6] xs:leading-normal">
+              KVGCE SPHERE HIVE X <br className="xs:hidden" /> DGITALWIZARDS IIT TIRUPATI
             </span>
           </div>
 
           {/* Title */}
           <div
             aria-hidden="true"
-            className="font-display font-black tracking-[-0.03em] leading-[0.92] uppercase mb-5 text-[36px] sm:text-[48px] md:text-[64px] lg:text-[76px]"
+            className="font-display font-black tracking-[-0.03em] leading-[0.92] uppercase mb-5 text-[48px] xs:text-[56px] sm:text-[48px] md:text-[64px] lg:text-[76px]"
           >
             <div className="overflow-hidden">
               <span className="hero-title-line block text-white">
-                HACK <span className="text-gradient-gold">Nova.</span>
+                HACK <br className="md:hidden" /> <span className="text-gradient-gold">Nova.</span>
               </span>
             </div>
           </div>
@@ -244,20 +255,42 @@ export default function Hero() {
             An AI hackathon for IIT Tirupati, IISER Tirupati, and neighbouring institutes uniting innovators, creators, and problem solvers to build limitless solutions for tomorrow.
           </p>
 
-          {/* Info pills */}
+          {/* Mobile Divider Line */}
+          <div className="w-12 h-[1px] bg-[#D4AF37]/40 my-6 md:hidden" />
+
+          {/* Info pills & lists */}
           <div
             ref={infoRef}
-            className="flex flex-wrap items-center gap-y-2 gap-x-2 sm:gap-3 font-mono text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.25em] uppercase text-white/40 mb-8"
+            className="mb-8"
           >
-            <span>24 Hours</span>
-            <span className="hidden sm:inline w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
-            <span>Aug 22–23 · 2026</span>
-            <span className="hidden sm:inline w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
-            <span>IIT Tirupati</span>
+            {/* Desktop Info pills */}
+            <div className="hidden md:flex flex-wrap items-center gap-y-2 gap-x-2 sm:gap-3 font-mono text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.25em] uppercase text-white/40">
+              <span>24 Hours</span>
+              <span className="hidden sm:inline w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
+              <span>Aug 22–23 · 2026</span>
+              <span className="hidden sm:inline w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
+              <span>IIT Tirupati</span>
+            </div>
+
+            {/* Mobile Info List with Icons */}
+            <div className="flex md:hidden flex-col gap-4 font-mono text-[10px] tracking-[0.2em] uppercase text-white/60">
+              <div className="flex items-center gap-3">
+                <Clock className="w-4 h-4 text-[#D4AF37]/80" />
+                <span>24 Hours</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Calendar className="w-4 h-4 text-[#D4AF37]/80" />
+                <span>Aug 22-23 · 2026</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <MapPin className="w-4 h-4 text-[#D4AF37]/80" />
+                <span>IIT Tirupati</span>
+              </div>
+            </div>
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+          <div className="hidden md:flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
             <a
               href="https://unstop.com/p/hacknova-sphere-hive-kvg-college-of-engineering-sullia-1693176"
               target="_blank"

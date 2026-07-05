@@ -198,21 +198,23 @@ export default function Navbar() {
               <kbd className="border border-space-violet/40 rounded px-1.5 py-0.5">K</kbd>
             </button>
 
+            {/* Register Button */}
             <Link
               href="/register"
-              className="hidden md:inline-flex btn-primary px-5 py-2 text-[11px] font-bold uppercase tracking-[0.12em] !rounded-full"
+              className="btn-primary px-3.5 py-1.5 md:px-5 md:py-2 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.08em] md:tracking-[0.12em] !rounded-full flex items-center gap-1 shrink-0"
             >
               Register
-              <ChevronRight className="w-3.5 h-3.5" />
+              <ChevronRight className="w-3 h-3 md:w-3.5 md:h-3.5" />
             </Link>
 
+            {/* Hamburger Button */}
             <button
-              className="md:hidden text-white/85 hover:text-white p-1.5 rounded-full hover:bg-white/5 transition-colors shrink-0"
+              className="md:hidden text-white bg-white/[0.07] border border-white/10 p-2 rounded-full hover:bg-white/15 active:bg-white/20 transition-all shrink-0 flex items-center justify-center w-9 h-9"
               onClick={() => setIsOpen((v) => !v)}
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
@@ -243,14 +245,7 @@ export default function Navbar() {
                   {item}
                 </button>
               ))}
-              <Link
-                href="/register"
-                className="btn-primary !rounded-xl mt-1.5 px-4 py-3 text-[12px] font-bold uppercase tracking-[0.18em] w-full justify-center"
-                onClick={() => setIsOpen(false)}
-              >
-                Register Now
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
+              {/* No duplicate Register button here since the main navbar Register button is always visible */}
             </motion.div>
           )}
         </AnimatePresence>
