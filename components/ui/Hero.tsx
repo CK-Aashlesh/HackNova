@@ -21,15 +21,12 @@ export default function Hero() {
     () => {
       // Entrance Timeline
       const tl = gsap.timeline();
-      
-      tl.from(
-        ".hero-subtitle-line",
-        {
-          y: "105%",
-          duration: 1.2,
-          ease: "power4.out",
-        }
-      )
+
+      tl.from(".hero-subtitle-line", {
+        y: "105%",
+        duration: 1.2,
+        ease: "power4.out",
+      })
         .from(
           ".hero-title-line",
           {
@@ -38,7 +35,7 @@ export default function Hero() {
             ease: "power4.out",
             stagger: 0.15,
           },
-          "-=0.9"
+          "-=0.9",
         )
         .from(
           taglineRef.current,
@@ -48,7 +45,7 @@ export default function Hero() {
             duration: 1.2,
             ease: "power3.out",
           },
-          "-=1.0"
+          "-=1.0",
         )
         .from(
           infoRef.current,
@@ -58,7 +55,7 @@ export default function Hero() {
             duration: 1.0,
             ease: "power2.out",
           },
-          "-=0.9"
+          "-=0.9",
         )
         .from(
           ".hero-cta-btn",
@@ -69,7 +66,7 @@ export default function Hero() {
             ease: "power3.out",
             stagger: 0.1,
           },
-          "-=0.9"
+          "-=0.9",
         )
         .from(
           ".scroll-cue-el",
@@ -79,7 +76,7 @@ export default function Hero() {
             duration: 0.8,
             ease: "power2.out",
           },
-          "-=0.5"
+          "-=0.5",
         );
 
       // Scroll-Driven Parallax on Background Video/Image Container
@@ -140,7 +137,7 @@ export default function Hero() {
         },
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   // 2. Interactive Mouse Parallax (Dynamic Depth Shift)
@@ -193,7 +190,7 @@ export default function Hero() {
             />
           </div>
         </div>
-        
+
         {/* Ambient Cosmic Shade layers to protect text readability and blend image edges */}
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 md:via-black/90 lg:via-black/95 to-transparent w-full lg:w-[75%] pointer-events-none z-10" />
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-space-black via-space-black/85 to-transparent h-[60%] lg:h-[45%] pointer-events-none z-10" />
@@ -209,7 +206,7 @@ export default function Hero() {
               width: `${(i % 3) * 1.5 + 2}px`,
               height: `${(i % 3) * 1.5 + 2}px`,
               // Spread initially on the right side over the cosmic background
-              top: `${(i * 5.5) + 10}%`,
+              top: `${i * 5.5 + 10}%`,
               left: `${(i % 4) * 12 + 40}%`,
               filter: "blur(0.5px)",
             }}
@@ -225,13 +222,15 @@ export default function Hero() {
         <div className="px-6 sm:px-12 lg:px-20 pb-20 xs:pb-24 sm:pb-24 md:pb-28 max-w-3xl">
           {/* Accessible heading */}
           <h1 className="sr-only">
-            HackNova 2026 - AI Hackathon at IIT Tirupati · 24 hours · August 22 - 23, 2026
+            HackNova 2026 - AI Hackathon at IIT Tirupati · 24 hours · August 22
+            - 23, 2026
           </h1>
 
           {/* Small subtitle above title */}
           <div className="overflow-hidden mb-3.5 max-w-[240px] xs:max-w-none">
             <span className="hero-subtitle-line block font-mono text-[9px] xs:text-[10px] sm:text-[9px] md:text-[10px] tracking-[0.16em] sm:tracking-[0.22em] md:tracking-[0.25em] uppercase text-[#D4AF37]/80 whitespace-normal leading-[1.6] xs:leading-normal">
-              KVGCE SPHERE HIVE X <br className="xs:hidden" /> DGITALWIZARDS IIT TIRUPATI
+              KVGCE SPHERE HIVE X <br className="xs:hidden" /> DGITALWIZARDS IIT
+              TIRUPATI
             </span>
           </div>
 
@@ -242,7 +241,8 @@ export default function Hero() {
           >
             <div className="overflow-hidden">
               <span className="hero-title-line block text-white">
-                HACK <br className="md:hidden" /> <span className="text-gradient-gold">Nova.</span>
+                HACK <br className="md:hidden" />{" "}
+                <span className="text-gradient-gold">Nova.</span>
               </span>
             </div>
           </div>
@@ -252,17 +252,40 @@ export default function Hero() {
             ref={taglineRef}
             className="text-[14px] sm:text-[15px] text-white/55 leading-[1.7] max-w-md mb-6 font-light"
           >
-            An AI hackathon for IIT Tirupati, IISER Tirupati, and neighbouring institutes uniting innovators, creators, and problem solvers to build limitless solutions for tomorrow.
+            An AI hackathon for IIT Tirupati, IISER Tirupati, and neighbouring
+            institutes uniting innovators, creators, and problem solvers to
+            build limitless solutions for tomorrow.
           </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto mb-8">
+            <a
+              href="https://unstop.com/p/hacknova-sphere-hive-kvg-college-of-engineering-sullia-1693176"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-cta-btn btn-primary group h-11 px-6 text-[11px] font-bold uppercase tracking-[0.15em] w-full sm:w-auto justify-center"
+            >
+              Register Now
+              <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+
+            <button
+              onClick={() =>
+                document
+                  .getElementById("challenge")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="hero-cta-btn btn-secondary h-11 px-6 text-[11px] font-bold uppercase tracking-[0.15em] w-full sm:w-auto justify-center"
+            >
+              Explore Challenge
+            </button>
+          </div>
 
           {/* Mobile Divider Line */}
           <div className="w-12 h-[1px] bg-[#D4AF37]/40 my-6 md:hidden" />
 
           {/* Info pills & lists */}
-          <div
-            ref={infoRef}
-            className="mb-8"
-          >
+          <div ref={infoRef}>
             {/* Desktop Info pills */}
             <div className="hidden md:flex flex-wrap items-center gap-y-2 gap-x-2 sm:gap-3 font-mono text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.25em] uppercase text-white/40">
               <span>24 Hours</span>
@@ -288,38 +311,16 @@ export default function Hero() {
               </div>
             </div>
           </div>
-
-          {/* CTAs */}
-          <div className="hidden md:flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
-            <a
-              href="https://unstop.com/p/hacknova-sphere-hive-kvg-college-of-engineering-sullia-1693176"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hero-cta-btn btn-primary group h-11 px-6 text-[11px] font-bold uppercase tracking-[0.15em] w-full sm:w-auto justify-center"
-            >
-              Register Now
-              <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
-
-            <button
-              onClick={() =>
-                document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="hero-cta-btn btn-secondary h-11 px-6 text-[11px] font-bold uppercase tracking-[0.15em] w-full sm:w-auto justify-center"
-            >
-              Explore Tracks
-            </button>
-          </div>
         </div>
       </div>
 
       {/* Scroll cue */}
-      <div className="scroll-cue-el absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 text-white/25">
+      {/* <div className="scroll-cue-el absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 text-white/25">
         <span className="font-mono text-[9px] tracking-[0.4em] uppercase">Scroll</span>
         <span className="relative w-px h-8 overflow-hidden bg-white/10">
           <span className="absolute inset-x-0 top-0 h-2.5 bg-[#D4AF37]/60 animate-scroll-dot" />
         </span>
-      </div>
+      </div> */}
     </section>
   );
 }

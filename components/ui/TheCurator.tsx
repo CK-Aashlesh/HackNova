@@ -290,7 +290,7 @@ export default function TheCurator() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const updateConstraints = () => {
-      const size = window.innerWidth >= 768 ? 130 : window.innerWidth >= 640 ? 110 : 88;
+      const size = window.innerWidth >= 768 ? 162 : window.innerWidth >= 640 ? 138 : 110;
       setDragConstraints({
         left: -window.innerWidth + size + 16,
         right: 16,
@@ -874,14 +874,14 @@ export default function TheCurator() {
         </AnimatePresence>
 
         {/* Speech Bubble */}
-        <div className="relative w-[88px] sm:w-[110px] md:w-[130px]">
+        <div className="relative w-[110px] sm:w-[138px] md:w-[162px]">
           <AnimatePresence mode="wait">
             {speech && !chatOpen && <SpeechBubble text={speech} />}
           </AnimatePresence>
         </div>
 
         {/* Particles & Mascot */}
-        <div className="relative w-[88px] h-[88px] sm:w-[110px] sm:h-[110px] md:w-[130px] md:h-[130px]">
+        <div className="relative w-[110px] h-[110px] sm:w-[138px] sm:h-[138px] md:w-[162px] md:h-[162px]">
           <Particles pose={pose} reducedMotion={reducedMotion} />
 
           {/* Clickable mascot button */}
@@ -940,6 +940,25 @@ export default function TheCurator() {
             <div className="absolute inset-0 rounded-full border border-[#D4AF37]/0 group-hover:border-[#D4AF37]/20 transition-colors duration-300 pointer-events-none" />
           </button>
         </div>
+
+        {/* Persistent "Need help?" label when idle (no speech, chat closed) */}
+        {!chatOpen && !speech && (
+          <motion.div
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="text-center pointer-events-none select-none mt-1"
+          >
+            <span
+              className="font-sans text-[10px] sm:text-[11px] tracking-wide text-white/50"
+              style={{ textShadow: "0 1px 6px rgba(0,0,0,0.5)" }}
+            >
+              Need help?{" "}
+              <span className="text-[#D4AF37]/70 font-medium">Ask Curator</span>
+            </span>
+          </motion.div>
+        )}
 
         {/* Chat indicator dot when closed */}
         {!chatOpen && (
