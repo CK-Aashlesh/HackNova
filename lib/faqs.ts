@@ -43,7 +43,7 @@ export const FAQS: FAQItem[] = [
   {
     question: "Where is HackNova 2026 held?",
     answer:
-      "HackNova 2026 is held offline at IIT Tirupati, Andhra Pradesh, India on 22 - 23 August 2026.",
+      "HackNova 2026 is held offline at IIT Tirupati, Andhra Pradesh, India on August 29 - 30, 2026.",
   },
   {
     question: "What is the prize pool for HackNova 2026?",

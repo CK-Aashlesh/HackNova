@@ -10,7 +10,7 @@ if (typeof window !== "undefined") {
 }
 
 const facts: [string, string][] = [
-  ["Date", "August 22 - 23, 2026"],
+  ["Date", "August 29 - 30, 2026"],
   ["Duration", "24 Hours, non-stop"],
   ["Venue", "IIT Tirupati, Andhra Pradesh"],
   ["Open To", "IIT Tirupati, IISER Tirupati & neighbouring institutes"],
@@ -73,7 +73,7 @@ export default function About() {
 
       // 5. Fact rows staggered reveal + scroll progress highlight
       const factRows = gsap.utils.toArray<HTMLElement>(".about-fact-row");
-      
+
       gsap.from(factRows, {
         opacity: 0,
         x: 30,
@@ -101,16 +101,20 @@ export default function About() {
         });
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
-    <section ref={containerRef} id="about" className="py-28 md:py-36 relative overflow-hidden">
+    <section
+      ref={containerRef}
+      id="about"
+      className="py-28 md:py-36 relative overflow-hidden"
+    >
       <div className="container mx-auto px-6 max-w-6xl">
         {/* Top meta rule */}
         <div className="about-meta flex items-baseline justify-between border-t border-space-violet/40 pt-5 mb-14 md:mb-20 font-mono text-[10px] tracking-[0.3em] uppercase text-white/45">
           <span>Mission - 01</span>
-          <span className="hidden sm:block">Aug 22 - 23 · 2026</span>
+          <span className="hidden sm:block">Aug 29 - 30 · 2026</span>
         </div>
 
         {/* Headline - Split Line Mask Reveal */}
@@ -132,8 +136,9 @@ export default function About() {
           <div className="lg:col-span-7">
             <p className="about-text text-[17px] md:text-lg text-white/85 leading-[1.65] mb-5 max-w-2xl font-light">
               HackNova is not a competition. It&apos;s a 24-hour proving ground
-              where the most curious builders from IIT Tirupati, IISER Tirupati, and neighbouring institutes gather to push the
-              edges of artificial intelligence.
+              where the most curious builders from IIT Tirupati, IISER Tirupati,
+              and neighbouring institutes gather to push the edges of artificial
+              intelligence.
             </p>
             <p className="about-text text-[15px] md:text-base text-white/55 leading-[1.7] max-w-2xl font-light">
               No model architectures to brute-force. No leaderboard tricks.

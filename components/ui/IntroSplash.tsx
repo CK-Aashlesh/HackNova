@@ -10,7 +10,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 
 const DURATION = 2.5; // seconds - total counter run
-const TAIL = 0.4;     // seconds - fade-out after hitting 100
+const TAIL = 0.4; // seconds - fade-out after hitting 100
 
 /**
  * First-paint intro splash.
@@ -41,7 +41,7 @@ export default function IntroSplash() {
 
     const t = window.setTimeout(
       () => setActive(false),
-      (DURATION + TAIL) * 1000
+      (DURATION + TAIL) * 1000,
     );
 
     return () => {
@@ -78,7 +78,7 @@ export default function IntroSplash() {
           {/* Top meta row */}
           <div className="absolute top-6 left-6 right-6 flex items-baseline justify-between font-mono text-[10px] tracking-[0.3em] uppercase text-white/55">
             <span>HackNova · 2026</span>
-            <span className="hidden sm:block">Aug 22 - 23</span>
+            <span className="hidden sm:block">Aug 29–30</span>
           </div>
 
           {/* Optional center wordmark - extremely quiet */}

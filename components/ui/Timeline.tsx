@@ -17,12 +17,42 @@ type Item = {
 };
 
 const schedule: Item[] = [
-  { time: "09:00 AM", title: "Opening Ceremony", desc: "Welcome address and rules briefing.", day: 1 },
-  { time: "10:00 AM", title: "Hacking Begins", desc: "Teams assemble and start building.", day: 1 },
-  { time: "02:00 PM", title: "Mentor Sessions", desc: "1-on-1 guidance from industry experts.", day: 1 },
-  { time: "08:00 PM", title: "Checkpoint 1", desc: "Progress review and midnight snacks.", day: 1 },
-  { time: "08:00 AM", title: "Hacking Ends", desc: "Final code submission.", day: 2 },
-  { time: "10:00 AM", title: "Judging & Awards", desc: "Presentations and closing ceremony.", day: 2 },
+  {
+    time: "09:00 AM",
+    title: "Opening Ceremony",
+    desc: "Welcome address and rules briefing.",
+    day: 1,
+  },
+  {
+    time: "10:00 AM",
+    title: "Hacking Begins",
+    desc: "Teams assemble and start building.",
+    day: 1,
+  },
+  {
+    time: "02:00 PM",
+    title: "Mentor Sessions",
+    desc: "1-on-1 guidance from industry experts.",
+    day: 1,
+  },
+  {
+    time: "08:00 PM",
+    title: "Checkpoint 1",
+    desc: "Progress review and midnight snacks.",
+    day: 1,
+  },
+  {
+    time: "08:00 AM",
+    title: "Hacking Ends",
+    desc: "Final code submission.",
+    day: 2,
+  },
+  {
+    time: "10:00 AM",
+    title: "Judging & Awards",
+    desc: "Presentations and closing ceremony.",
+    day: 2,
+  },
 ];
 
 export default function Timeline() {
@@ -58,15 +88,15 @@ export default function Timeline() {
             end: "bottom 65%",
             scrub: true,
           },
-        }
+        },
       );
 
       // 3. Staggered card reveals with side-based entrance (3D rotate & slide)
       const cards = gsap.utils.toArray<HTMLElement>(".timeline-card-wrapper");
-      
+
       cards.forEach((card, idx) => {
         const isEven = idx % 2 === 0;
-        
+
         // Staggered card entrance
         gsap.from(card, {
           opacity: 0,
@@ -85,14 +115,15 @@ export default function Timeline() {
         const cardInner = card.querySelector(".timeline-card-inner");
 
         if (node && cardInner) {
-          gsap.timeline({
-            scrollTrigger: {
-              trigger: card,
-              start: "top 65%",
-              end: "bottom 55%",
-              toggleActions: "play reverse play reverse",
-            },
-          })
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: card,
+                start: "top 65%",
+                end: "bottom 55%",
+                toggleActions: "play reverse play reverse",
+              },
+            })
             .to(node, {
               scale: 1.25,
               borderColor: "#D4AF37",
@@ -107,19 +138,23 @@ export default function Timeline() {
                 boxShadow: "0 0 25px rgba(212,175,55,0.12)",
                 duration: 0.3,
               },
-              0
+              0,
             );
         }
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   // Find first index of day 2 to mark a divider
   const firstDay2 = schedule.findIndex((s) => s.day === 2);
 
   return (
-    <section ref={containerRef} id="schedule" className="py-28 md:py-32 relative overflow-hidden bg-transparent">
+    <section
+      ref={containerRef}
+      id="schedule"
+      className="py-28 md:py-32 relative overflow-hidden bg-transparent"
+    >
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div
           className="absolute top-[40%] right-[-10%] w-[450px] h-[300px] blur-[100px] opacity-50"
@@ -133,9 +168,7 @@ export default function Timeline() {
       <div className="container mx-auto px-6 max-w-4xl relative z-10">
         {/* Heading */}
         <div className="timeline-header text-center mb-20">
-          <span className="eyebrow mb-5 mx-auto">
-            The Schedule
-          </span>
+          <span className="eyebrow mb-5 mx-auto">The Schedule</span>
           <h2 className="font-display text-[44px] sm:text-[60px] md:text-[80px] font-black leading-[0.92] uppercase tracking-[-0.03em]">
             <span className="text-white">EVENT </span>
             <span className="text-gradient-purple">TIMELINE</span>
@@ -157,7 +190,9 @@ export default function Timeline() {
                       <div className="ml-16 md:ml-0 md:flex md:justify-center">
                         <span className="inline-flex items-center gap-2 chip">
                           <span className="chip-dot" />
-                          {item.day === 1 ? "DAY 01 · AUGUST 22" : "DAY 02 · AUGUST 23"}
+                          {item.day === 1
+                            ? "DAY 01 · AUGUST 29"
+                            : "DAY 02 · AUGUST 30"}
                         </span>
                       </div>
                     </div>
@@ -177,7 +212,9 @@ export default function Timeline() {
                     {/* Card container */}
                     <div
                       className={`w-full md:w-1/2 pl-16 md:pl-0 ${
-                        index % 2 === 0 ? "md:pl-12" : "md:pr-12 text-left md:text-right"
+                        index % 2 === 0
+                          ? "md:pl-12"
+                          : "md:pr-12 text-left md:text-right"
                       }`}
                     >
                       <div className="timeline-card-inner group glass-card glass-card-hover border border-space-violet/25 hover:border-space-purple/30 rounded-2xl p-6 transition-all duration-300 relative overflow-hidden">

@@ -67,17 +67,17 @@ export default function ManifestoPage() {
 
         <Section title="01 · The thesis">
           <p>
-            Every production AI team you admire has the same dirty secret:
-            their week-to-week wins almost never come from a new architecture.
-            They come from spotting the seven mislabeled images that pulled the
-            model in the wrong direction, or the one rare class that the
-            sampler quietly starved.
+            Every production AI team you admire has the same dirty secret: their
+            week-to-week wins almost never come from a new architecture. They
+            come from spotting the seven mislabeled images that pulled the model
+            in the wrong direction, or the one rare class that the sampler
+            quietly starved.
           </p>
           <p>
             We chose this format because it forces builders to confront the
             actual job. You will not impress us with a transformer you found on
-            arxiv last week. You will impress us by looking at your data the
-            way a writer looks at a draft - closely, repeatedly, and with the
+            arxiv last week. You will impress us by looking at your data the way
+            a writer looks at a draft - closely, repeatedly, and with the
             willingness to throw away the ten percent that&apos;s lying to you.
           </p>
         </Section>
@@ -85,8 +85,8 @@ export default function ManifestoPage() {
         <Section title="02 · What you are actually doing">
           <p>
             On day one you will receive a small labeled image set, a frozen
-            classifier, and a much larger pool of unlabeled candidates. Your
-            job for the next twenty-four hours is to decide which of those
+            classifier, and a much larger pool of unlabeled candidates. Your job
+            for the next twenty-four hours is to decide which of those
             candidates are worth labeling, label them well, and feed them back
             until the model on the held-out set climbs.
           </p>
@@ -100,19 +100,19 @@ export default function ManifestoPage() {
             >
               3LC
             </a>{" "}
-            to make the embeddings, the per-sample model feedback, and the
-            label history first-class objects you can hold in your hands. The
-            tooling exists. The taste is on you.
+            to make the embeddings, the per-sample model feedback, and the label
+            history first-class objects you can hold in your hands. The tooling
+            exists. The taste is on you.
           </p>
         </Section>
 
         <Section title="03 · How we judge">
           <p>
-            Final accuracy is the visible metric, but it is not the whole
-            story. We will read your write-up. We will look at the trajectory
-            of your runs. Two teams can land within half a point of each other
-            and one of them will win comfortably because they made decisions on
-            purpose, and the other one trusted the leaderboard.
+            Final accuracy is the visible metric, but it is not the whole story.
+            We will read your write-up. We will look at the trajectory of your
+            runs. Two teams can land within half a point of each other and one
+            of them will win comfortably because they made decisions on purpose,
+            and the other one trusted the leaderboard.
           </p>
           <p>
             Show your work. Tell us which samples you killed, which you kept,
@@ -141,7 +141,7 @@ export default function ManifestoPage() {
               Bring your A-team.
             </div>
             <p className="text-sm text-white/55 mt-1">
-              August 22 - 23, 2026 · IIT Tirupati
+              August 29 - 30, 2026 · IIT Tirupati
             </p>
           </div>
           <a

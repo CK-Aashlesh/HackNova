@@ -27,139 +27,134 @@ export async function GET(req: NextRequest) {
       ? "I just registered."
       : "We're going to HackNova."
     : "An exclusive AI hackathon.";
-  const subhead = team
-    ? team.toUpperCase()
-    : "HACKNOVA · 2026";
+  const subhead = team ? team.toUpperCase() : "HACKNOVA · 2026";
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        padding: "60px 72px",
+        background:
+          "radial-gradient(circle at 25% 20%, rgba(212,175,55,0.32) 0%, transparent 55%), radial-gradient(circle at 80% 90%, rgba(241,208,138,0.22) 0%, transparent 55%), #0D0D0D",
+        color: "white",
+        fontFamily: "system-ui, -apple-system, sans-serif",
+        position: "relative",
+      }}
+    >
+      {/* Top meta */}
       <div
         style={{
-          width: "100%",
-          height: "100%",
           display: "flex",
-          flexDirection: "column",
-          padding: "60px 72px",
-          background:
-            "radial-gradient(circle at 25% 20%, rgba(212,175,55,0.32) 0%, transparent 55%), radial-gradient(circle at 80% 90%, rgba(241,208,138,0.22) 0%, transparent 55%), #0D0D0D",
-          color: "white",
-          fontFamily: "system-ui, -apple-system, sans-serif",
-          position: "relative",
+          justifyContent: "space-between",
+          alignItems: "baseline",
+          fontSize: 18,
+          letterSpacing: 6,
+          textTransform: "uppercase",
+          color: "rgba(255,255,255,0.55)",
+          borderTop: "1px solid rgba(255,255,255,0.18)",
+          paddingTop: 22,
         }}
       >
-        {/* Top meta */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "baseline",
-            fontSize: 18,
-            letterSpacing: 6,
-            textTransform: "uppercase",
-            color: "rgba(255,255,255,0.55)",
-            borderTop: "1px solid rgba(255,255,255,0.18)",
-            paddingTop: 22,
-          }}
-        >
-          <span>HackNova · 2026</span>
-          <span>Aug 22 - 23 · IIT Tirupati</span>
-        </div>
+        <span>HackNova · 2026</span>
+        <span>Aug 29–30 · IIT Tirupati</span>
+      </div>
 
-        {/* Centered block */}
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          {team && (
-            <div
+      {/* Centered block */}
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        {team && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              fontSize: 22,
+              letterSpacing: 5,
+              textTransform: "uppercase",
+              color: "rgba(212,175,55,0.95)",
+              marginBottom: 24,
+            }}
+          >
+            <span
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 14,
-                fontSize: 22,
-                letterSpacing: 5,
-                textTransform: "uppercase",
-                color: "rgba(212,175,55,0.95)",
-                marginBottom: 24,
+                width: 10,
+                height: 10,
+                borderRadius: 999,
+                background: "#D4AF37",
+                boxShadow: "0 0 20px rgba(212,175,55,0.8)",
               }}
-            >
-              <span
-                style={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: 999,
-                  background: "#D4AF37",
-                  boxShadow: "0 0 20px rgba(212,175,55,0.8)",
-                }}
-              />
-              {isRegistered ? "Confirmed · Team" : "Team"}
-            </div>
-          )}
-
-          <div
-            style={{
-              fontSize: team ? 96 : 124,
-              fontWeight: 900,
-              lineHeight: 1,
-              letterSpacing: -3,
-              textTransform: "uppercase",
-              color: "white",
-              maxWidth: 980,
-              display: "flex",
-            }}
-          >
-            {headline}
+            />
+            {isRegistered ? "Confirmed · Team" : "Team"}
           </div>
+        )}
 
-          <div
-            style={{
-              fontSize: team ? 132 : 56,
-              fontWeight: 900,
-              lineHeight: 1,
-              letterSpacing: -4,
-              textTransform: "uppercase",
-              color: team ? "white" : "rgba(255,255,255,0.35)",
-              marginTop: team ? 24 : 16,
-              display: "flex",
-              maxWidth: 1080,
-              wordBreak: "break-word",
-            }}
-          >
-            {subhead}
-          </div>
-        </div>
-
-        {/* Bottom meta */}
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "baseline",
-            fontSize: 18,
-            letterSpacing: 6,
+            fontSize: team ? 96 : 124,
+            fontWeight: 900,
+            lineHeight: 1,
+            letterSpacing: -3,
             textTransform: "uppercase",
-            color: "rgba(255,255,255,0.55)",
-            borderTop: "1px solid rgba(255,255,255,0.18)",
-            paddingTop: 22,
+            color: "white",
+            maxWidth: 980,
+            display: "flex",
           }}
         >
-          <span>hacknova.in</span>
-          <span>by Sphere Hive</span>
+          {headline}
+        </div>
+
+        <div
+          style={{
+            fontSize: team ? 132 : 56,
+            fontWeight: 900,
+            lineHeight: 1,
+            letterSpacing: -4,
+            textTransform: "uppercase",
+            color: team ? "white" : "rgba(255,255,255,0.35)",
+            marginTop: team ? 24 : 16,
+            display: "flex",
+            maxWidth: 1080,
+            wordBreak: "break-word",
+          }}
+        >
+          {subhead}
         </div>
       </div>
-    ),
+
+      {/* Bottom meta */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "baseline",
+          fontSize: 18,
+          letterSpacing: 6,
+          textTransform: "uppercase",
+          color: "rgba(255,255,255,0.55)",
+          borderTop: "1px solid rgba(255,255,255,0.18)",
+          paddingTop: 22,
+        }}
+      >
+        <span>hacknova.in</span>
+        <span>by Sphere Hive</span>
+      </div>
+    </div>,
     {
       width: W,
       height: H,
       // 6h cache + stale-while-revalidate for share crawlers
       headers: {
-        "Cache-Control":
-          "public, max-age=21600, stale-while-revalidate=86400",
+        "Cache-Control": "public, max-age=21600, stale-while-revalidate=86400",
       },
-    }
+    },
   );
 }

@@ -32,8 +32,8 @@ export const SITE = {
 
   event: {
     name: "HackNova 2026",
-    startDate: "2026-08-22T09:00:00+05:30",
-    endDate: "2026-08-23T13:00:00+05:30",
+    startDate: "2026-08-29T09:00:00+05:30",
+    endDate: "2026-08-30T13:00:00+05:30",
     eventStatus: "https://schema.org/EventScheduled",
     attendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     venue: {

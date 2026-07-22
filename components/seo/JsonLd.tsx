@@ -103,7 +103,7 @@ export function OrganizationJsonLd() {
     parentOrganization: { "@type": "CollegeOrUniversity", name: o.parent },
     email: o.email,
     sameAs: [o.instagram, ...Object.values(SITE.socials)].filter(
-      (v, i, a) => v && a.indexOf(v) === i
+      (v, i, a) => v && a.indexOf(v) === i,
     ),
     contactPoint: [
       {

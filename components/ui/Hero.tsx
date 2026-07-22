@@ -222,8 +222,8 @@ export default function Hero() {
         <div className="px-6 sm:px-12 lg:px-20 pb-20 xs:pb-24 sm:pb-24 md:pb-28 max-w-3xl">
           {/* Accessible heading */}
           <h1 className="sr-only">
-            HackNova 2026 - AI Hackathon at IIT Tirupati · 24 hours · August 22
-            - 23, 2026
+            HackNova 2026 - AI Hackathon at IIT Tirupati · 24 hours · August
+            29–30 - 23, 2026
           </h1>
 
           {/* Small subtitle above title */}
@@ -290,7 +290,7 @@ export default function Hero() {
             <div className="hidden md:flex flex-wrap items-center gap-y-2 gap-x-2 sm:gap-3 font-mono text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.25em] uppercase text-white/40">
               <span>24 Hours</span>
               <span className="hidden sm:inline w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
-              <span>Aug 22–23 · 2026</span>
+              <span>Aug 29–30 · 2026</span>
               <span className="hidden sm:inline w-[3px] h-[3px] rounded-full bg-[#D4AF37]/40" />
               <span>IIT Tirupati</span>
             </div>
@@ -303,7 +303,7 @@ export default function Hero() {
               </div>
               <div className="flex items-center gap-3">
                 <Calendar className="w-4 h-4 text-[#D4AF37]/80" />
-                <span>Aug 22-23 · 2026</span>
+                <span>Aug 29–30 · 2026</span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="w-4 h-4 text-[#D4AF37]/80" />

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 
-const TARGET = new Date("2026-08-22T09:00:00+05:30").getTime();
+const TARGET = new Date("2026-08-29T09:00:00+05:30").getTime();
 
 function diff(now: number) {
   const d = Math.max(0, TARGET - now);
